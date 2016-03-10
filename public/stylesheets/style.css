@@ -1,8 +1,24 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+span.available {
+  color: #008800;
+  font-weight: 700;
 }
 
-a {
-  color: #00B7FF;
+span.notavailable {
+  color: #880000;
+  font-weight: 700;
 }
+
+#navArea a {
+  padding: 0em 0.5em;
+}
+
+#navArea a:active {
+  color: aquamarine;
+  text-decoration: underline;
+}
+
+.review {padding-bottom: 5px;}
+.panel-body.review-container {padding-top: 0;}
+.review-header {margin-bottom: 10px;}
+.reviewAuthor {margin: 0 5px;}
+.reviewTimestamp {color: #ccc;}

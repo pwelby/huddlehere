@@ -1,0 +1,68 @@
+block content
+  .row.page-header: .col-lg-12
+      h1 HuddleHere
+  .row
+    .col-xs-12.col-md-9
+      .row
+        .col-xs-12.col-sm-6
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title TIME
+            .panel-body
+                h4 Start
+                p
+                  span#memStartTime 2:00 PM
+                h4 End
+                p
+                  span#memEndTime 3:00 PM
+                br
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Availability
+            .panel-body
+              input(type="checkbox", name = "Available")
+              | &nbsp; Available &nbsp;
+              br
+              input(type="checkbox", name = "Unavailable")
+              | &nbsp; Unavailable &nbsp;
+        .col-xs-12.col-sm-6.location-map
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Calendar Showing Date of Meeting Goes Here
+            .panel-body
+              img.img-responsive.img-rounded(src="https://lh3.ggpht.com/gzZkfyffoLVRMq1dxZ_xBsaAyWiuoKkCBF27Njv4vX_7TWMuv2HZhtgACZeCfmR223k=w300")
+  .row
+    .col-xs-12.col-md-9
+      .row
+        .col-xs-12.col-sm-6
+          .panel.panel-primary
+            .panel-heading
+                h2.panel-title LOCATION
+            .panel-body
+                h4 1 University Ave. 
+                p
+                  h4 Lowell, MA 01854 &nbsp;
+        .col-xs-12.col-sm-6.location-map
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Location map
+            .panel-body
+              img.img-responsive.img-rounded(src="http://maps.googleapis.com/maps/api/staticmap?center=42.653224,-71.325584&zoom=17&size=350x350&sensor=false&markers=42.653224,-71.325584&scale=2")
+      .row
+        .col-xs-12
+          .panel.panel-primary.agenda-panel
+            .panel-heading
+              a.btn.btn-default.pull-right Add Comment
+              h2.panel-title Meeting Aganda
+            .panel-body.agenda-container
+                .row
+                  .col-xs-12  
+                    li Agenda item one
+                    //a.btn.btn-default.pull-right Add Comment
+                  .col-xs-12
+                    li Agenda item two  
+                      //a.btn.btn-default.pull-right Add Comment
+                  .col-xs-12
+                    li Agenda item three  
+                    //a.btn.btn-default.pull-right Add Comment
+  script(src='/javascripts/fwrite.js')

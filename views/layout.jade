@@ -2,10 +2,27 @@ doctype html
 html
   head
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.js')
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.js')
+    link(rel='stylesheet', href='/stylesheets/jquery-ui.min.css')
+    link(rel='stylesheet', href='/stylesheets/jquery-ui.structure.min.css')
+    link(rel='stylesheet', href='/stylesheets/jquery-ui.theme.min.css')
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+    script(src='/javascripts/jquery-ui.min.js')
     script(src='/bootstrap/js/bootstrap.min.js')
+    script(src='http://maps.googleapis.com/maps/api/js')
+    //- script(src='/javascripts/fdata.js')
+    //- script(src='/javascripts/nav.js')
+    //- script(src='/javascripts/fread.js')
+    //- script(src='/javascripts/fwrite.js')
+    //- script(src='/javascripts/availRand.js')
+  body
+    div#navArea
+      h3 ALPHA NAV:
+      a(href='/') Meeting Creator
+      a(href='/plannerLeader') Planner (Leader View)
+      a(href='/plannerMember') Planner (Member View)
+    div(class='container', id='mainContainer')
+      block content
     
