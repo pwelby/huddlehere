@@ -8,7 +8,7 @@ var agendaItemSchema = new mongoose.Schema({
   title: {type: String, required: true},
   description: {type: String, required: true},
   duration: {type: Number, required: true},
-  comments: {type: [agendaCommentSchema], required: true}
+  comments: [agendaCommentSchema]
 });
 
 // agenda item comment schema, to keep commenter info in one place
@@ -25,5 +25,7 @@ var meetingSchema = new mongoose.Schema({
   format: {type: String, required: true},
   leader: {type: String, required: true},
   members: {type: [String], required: true},
-  agenda: [agendaItemSchema]
+  agenda: {type: [agendaItemSchema], required: true}
 });
+
+mongoose.model('Meeting', meetingSchema, 'meetings');
