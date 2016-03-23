@@ -21,8 +21,9 @@ var agendaCommentSchema = new mongoose.Schema({
 // primary document schema,
 var meetingSchema = new mongoose.Schema({
   meetingDate: {type: Date, required: true},
+  endTime: {type: Date, required: true},
   location: {type: [Number], required: true},
-  format: {type: String, required: true},
+  format: {type: String, required: true, default: 'Default'},
   leader: {type: String, required: true},
   members: {type: [String], required: true},
   agenda: {type: [agendaItemSchema], required: true}
