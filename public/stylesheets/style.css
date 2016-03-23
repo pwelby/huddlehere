@@ -17,8 +17,13 @@ span.notavailable {
   text-decoration: underline;
 }
 
-.panel-body {
+.panel-primary .panel-body {
   background-color: #f1f1f1;
+  color: #161616;
+}
+
+.panel-default .panel-body {
+  background-color: #a0a0a0;
   color: #161616;
 }
 
