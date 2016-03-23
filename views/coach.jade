@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  .row.page-header: .col-lg-12
+    h1 HuddleHere
+    small Meeting Schedule Coach
+  .row
+    .col-md-8
+      .panel.panel-primary
+        .panel-heading
+          h2.panel-title Format: Brainstorming
+        .panel-body
+          p Facilitator: Jesse
+          p Recorder: John
+          h2 Objective: Improve the wheel
+          .panel.panel-default
+            .panel-heading
+              h2.panel-title Starting Point
+            .panel-body
+              em If it ain't broke, don't fix it
+    .col-md-4
+      .panel.panel-primary
+        .panel-heading
+          h2.panel-title Location
+        .panel-body
+          img.img-responsive.img-rounded(src="http://maps.googleapis.com/maps/api/staticmap?center=42.653224,-71.325584&zoom=17&size=350x350&sensor=false&markers=42.653224,-71.325584&scale=2")
+          address
+            strong 1 University Ave.
+            br
+            | Lowell, MA 01854
+            br
+      .panel.panel-primary
+        .panel-heading
+          h2.panel-title Timing
+        .panel-body
+          strong Scheduled Start:
+          br 
+          p 2:00 PM
+          br
+          strong Scheduled End:
+          br
+          p 2:30 PM
+            
+            
