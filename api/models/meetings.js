@@ -2,6 +2,12 @@
  * File: schema.js -- define MongoDB schema for storing meeting state
  */
 var mongoose = require('mongoose');
+// agenda item comment schema, to keep commenter info in one place
+var agendaCommentSchema = new mongoose.Schema({
+  commenter: {type: String, required: true},
+  commentText: {type: String, required: true},
+  created: {type: Date, default: Date.now}
+});
 
 // agenda item schema for use in subdocuments
 var agendaItemSchema = new mongoose.Schema({
@@ -11,12 +17,7 @@ var agendaItemSchema = new mongoose.Schema({
   comments: [agendaCommentSchema]
 });
 
-// agenda item comment schema, to keep commenter info in one place
-var agendaCommentSchema = new mongoose.Schema({
-  commenter: {type: String, required: true},
-  commentText: {type: String, required: true},
-  created: {type: Date, default: Date.now}
-});
+
 
 // primary document schema,
 var meetingSchema = new mongoose.Schema({
