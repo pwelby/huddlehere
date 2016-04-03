@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
+var AGENDA = mongoose.model('agenda');
 var MEET = mongoose.model('Meeting');
 
-//creates and adds agenda to called meetingid
-module.exports.agendaCreate = function(req,res){
+//creates and adds comments to called meetingid
+module.exports.commentsCreate = function(req,res){
     var meetingid = req.params.meetingid;
-    //find valid meetingid and call add Agenda function if found else return err
+    //find valid meetingid and call addComments function if found else return err
     if(meetingid){
         MEET
             .findById(meetingid)
@@ -14,7 +15,7 @@ module.exports.agendaCreate = function(req,res){
                     if(err){
                         sendJsonResponse(res,400,err);
                     }else{
-                        AddAgenda(req,res,meeting);
+                        addComments(req,res,meeting);
                          }
                     });
                 //Meeting id wasnt valid so send error
@@ -22,35 +23,35 @@ module.exports.agendaCreate = function(req,res){
                     sendJsonResponse(res,404,{"message": "Meeting id not found"});
                 }
     };
-var AddAgenda = function(req,res,meeting){
-    //sends error if meeting id isnt found in collection
-    if(!meeting){
-        sendJsonResponse(res,404,{"message": "meetingid not found"});
-    //push data into agenda subdocument
-    }else{
-        meeting.agenda.push({
-            title: req.body.title,
-            description: req.body.description,
-            duration: req.body.duration,
-            comments: []
+var addComments = function(req,res,meeting){
+    //select the correct agenda subdocument
+    var thisAgenda = meeting.agenda.id(req.params.agendaid);
+    if(!thisAgenda){
+        sendJsonResponse(res,404,{"message": "Agenda id not found"});
+    } else{
+        //push relevant comment data into the selected agenda subdocument
+        thisAgenda.comments.push({
+            commenter: req.body.commenter,
+            commentText: req.body.commentText
         });
         meeting.save(function(err,meeting){
-            var thisAgenda;
+            //error occured during save so send 400 response
             if(err){
                 sendJsonResponse(res,400,err);
             //sends last agenda pushed into agenda array back as json response
             }else{
-                thisAgenda = meeting.agenda[meeting.agenda.length -1];
-                sendJsonResponse(res,201,thisAgenda);
+                thisComment = thisAgenda.comments[thisAgenda.comments.length -1];
+                sendJsonResponse(res,201,thisComment);
             }
         });
     }
 };
-//finds a agenda 
-module.exports.agendaRead = function(req,res){
-   console.log('looking up agenda information', req.params);
-  //check if agenda id is correct
-  if (req.params && req.params.agendaid) {
+
+//finds comments and returns as json 
+module.exports.commentsRead = function(req,res){
+   console.log('looking up comment information', req.params);
+  //check if comments id is correct
+  if (req.params && req.params.commentsid) {
     MEET
       .findById(req.params.meetingid)
       .select('agenda')
@@ -67,9 +68,10 @@ module.exports.agendaRead = function(req,res){
           sendJsonResponse(res, 404, err);
           return;
         }
-        //finds the correct agenda subdocument based on meetingid and returns it as json
+        //finds the correct comment subdocument based on meetingid and returns it as json
         thisAgenda = meeting.agenda.id(req.params.agendaid);
-        sendJsonResponse(res, 200, thisAgenda);
+        thisComment = thisAgenda.comments.id(req.params.commentsid);
+        sendJsonResponse(res, 200, thisComment);
       });
     //locationid wasnt present in parameters and therefore an invalid api call
   } else {
@@ -80,11 +82,11 @@ module.exports.agendaRead = function(req,res){
   }
 };
 
-module.exports.agendaUpdate = function(req,res){
-    //check to see if meeting id and agendaid is in request
-if (!req.params.meetingid || !req.params.agendaid) {
+module.exports.commentsUpdate = function(req,res){
+    //check to see if meeting id, agendaid, and comment id is in request
+if (!req.params.meetingid || !req.params.agendaid || !req.params.commentsid) {
     sendJsonResponse(res, 404, {
-      "message": "Not found, meetingid and agendaid are required"
+      "message": "Not found, meetingid, agendaid, and comment are required"
     });
     return;
   }
@@ -104,29 +106,29 @@ if (!req.params.meetingid || !req.params.agendaid) {
           sendJsonResponse(res, 400, err);
           return;
         }
-        //update agenda with data from the put request
+        //update comment with data from the put request
         thisAgenda = meeting.agenda.id(req.params.agendaid);
-        thisAgenda.title = req.body.title;
-        thisAgenda.description = req.body.description;
-        thisAgenda.duration = req.body.duration;
+        thisComment = thisAgenda.comments.id(req.params.commentsid);
+        thisComment.commenter = req.body.commenter;
+        thisComment.commentText = req.body.commentText;
         meeting.save(function(err, meeting) {
             //check for error during save function
           if (err) {
             sendJsonResponse(res, 404, err);
             //send back agenda as json response on success
           } else {
-            sendJsonResponse(res, 200, thisAgenda);
+            sendJsonResponse(res, 200, thisComment);
           }
         });
       }
   );
 };
 
-module.exports.agendaDelete = function(req,res){
+module.exports.commentsDelete = function(req,res){
     //check to see if meeting id, agendaid, and comment id is in request
-if (!req.params.meetingid || !req.params.agendaid) {
+if (!req.params.meetingid || !req.params.agendaid || !req.params.commentsid) {
     sendJsonResponse(res, 404, {
-      "message": "Not found, meetingid and agenda are required"
+      "message": "Not found, meetingid, agendaid, and comment are required"
     });
     return;
   }
@@ -148,7 +150,8 @@ if (!req.params.meetingid || !req.params.agendaid) {
         }
          //update comment with data from the put request
         thisAgenda = meeting.agenda.id(req.params.agendaid);
-        thisAgenda.remove();
+        thisComment = thisAgenda.comments.id(req.params.commentsid);
+            thisComment.remove();
             meeting.save(function(err, meeting) {
             //check for error during save function
             if (err) {

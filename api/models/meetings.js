@@ -14,7 +14,7 @@ var agendaItemSchema = new mongoose.Schema({
   title: {type: String, required: true},
   description: {type: String, required: true},
   duration: {type: Number, required: true},
-  comments: [agendaCommentSchema]
+  comments: {type: [agendaCommentSchema], required: false}
 });
 
 
@@ -27,7 +27,8 @@ var meetingSchema = new mongoose.Schema({
   format: {type: String, required: true, default: 'Default'},
   leader: {type: String, required: true},
   members: {type: [String], required: true},
-  agenda: {type: [agendaItemSchema], required: true}
+  agenda: {type: [agendaItemSchema], required: false}
 });
 
 mongoose.model('Meeting', meetingSchema, 'meetings');
+mongoose.model("agenda", agendaItemSchema);
