@@ -1,3 +1,11 @@
+/**
+ * File: db.js
+ * Author: Peter Welby
+ * 
+ * Handles establishment and cleanup of MongoDB connections
+ * via Mongoose
+ */
+
 var mongoose = require('mongoose');
 
 var dbURI = 'mongodb://localhost/test';

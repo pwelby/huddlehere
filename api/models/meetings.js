@@ -1,5 +1,9 @@
 /**
- * File: schema.js -- define MongoDB schema for storing meeting state
+ * File: meetings.js 
+ * Author: Peter Welby
+ * 
+ * Defines meeting document and sub-document schema for use by
+ * Mongoose
  */
 var mongoose = require('mongoose');
 // agenda item comment schema, to keep commenter info in one place
