@@ -1,4 +1,10 @@
-// Do not use yet, still in progress
+/**
+ * File: index.js
+ * Author: Alex Li
+ * 
+ * Defined routes specified for all api calls including meetings, agenda, and comments
+ * Currently specifies CRUD operation routes
+ */
 
 var express = require('express');
 var router = express.Router();
