@@ -1,6 +1,12 @@
 var mongoose = require('mongoose');
 
 var dbURI = 'mongodb://localhost/test';
+
+// grab production URI from heroku config
+if (process.env.NODE_ENV === 'production') {
+    dbURI = process.env.MONGOLAB_URI;
+}
+
 mongoose.connect(dbURI);
 
 // status messages to console
