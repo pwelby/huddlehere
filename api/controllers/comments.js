@@ -1,5 +1,5 @@
 /**
- * File: agenda.js
+ * File: comments.js
  * Author: Alex Li
  * 
  * Defined controller for any api calls regarding comment subdocuments.
