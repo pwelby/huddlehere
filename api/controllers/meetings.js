@@ -1,11 +1,13 @@
+/**
+ * File: agenda.js
+ * Author: Alex Li
+ * 
+ * Defined controller for any api calls regarding meeting documents.
+ * Currently performs CRUD operations
+ */
 var mongoose = require('mongoose');
 var MEET = mongoose.model('Meeting');
 
-
-//All api calls are filled with fake successes for now
-module.exports.meetingsList = function(req,res){
-    sendJsonResponse(res, 200, {"status" : "test success"});
-};
 //creates and adds a meeting document to database
 module.exports.meetingsCreate = function(req,res){
     MEET.create({
