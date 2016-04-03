@@ -1,5 +1,5 @@
 /**
- * File: agenda.js
+ * File: meetings.js
  * Author: Alex Li
  * 
  * Defined controller for any api calls regarding meeting documents.
