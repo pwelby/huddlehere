@@ -1,3 +1,11 @@
+/**
+ * File: agenda.js
+ * Author: Alex Li
+ * 
+ * Defined controller for any api calls regarding comment subdocuments.
+ * Currently performs CRUD operations
+ */
+
 var mongoose = require('mongoose');
 var AGENDA = mongoose.model('agenda');
 var MEET = mongoose.model('Meeting');
