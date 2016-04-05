@@ -6,15 +6,15 @@
  * http://stackoverflow.com/a/10009027
  */
 
-var geocoder;
+var utilGeocoder;
 
-function initialize() {
+var geoInitialize = function() {
   geocoder = new google.maps.Geocoder();
-}
+};
 
-function codeLatLng(lat, lng) {
+var codeLatLng = function(lat, lng) {
   var latlng = new google.maps.LatLng(lat, lng);
-  geocoder.geocode({
+  utilGeocoder.geocode({
     'latLng': latlng
   }, function (results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
@@ -29,6 +29,6 @@ function codeLatLng(lat, lng) {
       return "";
     }
   });
-}
+};
 
-google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', geoInitialize);
