@@ -27,6 +27,8 @@ router.get('/coach', function(req, res, next) {
 router.get('/m/:meetingid/l', ctrlMeetings.getLeaderPage);
 router.get('/m/:meetingid/m', ctrlMeetings.getMemberPage);
 
+// TODO: Add post handler for redirect from leader/member forms
+
 // Meeting schedule coach route
 router.get('/m/:meetingid/c', ctrlMeetings.getCoachPage);
 
