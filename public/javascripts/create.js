@@ -5,6 +5,8 @@
  * Handles location parsing & map updating for meeting creation form
  */
 
+var createCurrentLocCoords = [];
+
 function initPreSelMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
@@ -25,6 +27,8 @@ function geocodeAddress(geocoder, resultsMap) {
   address = street + "," + city + "," + state;
   geocoder.geocode({ 'address': address }, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
+      createCurrentLocCoords[0] = results[0].geometry.location.lat();
+      createCurrentLocCoords[1] = results[0].geometry.location.lng();
       resultsMap.setCenter(results[0].geometry.location);
       var marker = new google.maps.Marker({
         map: resultsMap,
