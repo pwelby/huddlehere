@@ -1,6 +1,20 @@
+/**
+ * File: /api/models/db.js
+ * Author: Peter Welby
+ * 
+ * Handles establishment and cleanup of MongoDB connections
+ * via Mongoose
+ */
+
 var mongoose = require('mongoose');
 
 var dbURI = 'mongodb://localhost/HuddleHere';
+
+// grab production URI from heroku config
+if (process.env.NODE_ENV === 'production') {
+    dbURI = process.env.MONGOLAB_URI;
+}
+
 mongoose.connect(dbURI);
 
 // status messages to console
@@ -19,6 +33,7 @@ mongoose.connection.on('disconnected', function() {
 var gracefulShutdown = function(msg, callback) {
   mongoose.connection.close(function() {
     console.log('Mongoose disconnected: ' + msg);
+    callback();
   });
 };
 
@@ -40,3 +55,5 @@ process.on('SIGTERM', function() {
         process.exit(0);
     });
 });
+
+require('./meetings');
