@@ -27,6 +27,10 @@ span.notavailable {
   color: #161616;
 }
 
+#countDownClock {
+  font-size: 2.5em;
+}
+
 .review {padding-bottom: 5px;}
 .panel-body.review-container {padding-top: 0;}
 .review-header {margin-bottom: 10px;}
