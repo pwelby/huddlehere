@@ -1,5 +1,5 @@
 /**
- * File: db.js
+ * File: /api/models/db.js
  * Author: Peter Welby
  * 
  * Handles establishment and cleanup of MongoDB connections

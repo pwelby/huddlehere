@@ -1,5 +1,5 @@
 /**
- * File: meetings.js 
+ * File: /api/models/meetings.js 
  * Author: Peter Welby
  * 
  * Defines meeting document and sub-document schema for use by
