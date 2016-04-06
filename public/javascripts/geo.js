@@ -9,7 +9,8 @@
 var utilGeocoder;
 
 var geoInitialize = function() {
-  geocoder = new google.maps.Geocoder();
+  utilGeocoder = new google.maps.Geocoder();
+  populateLocation();
 };
 
 var codeLatLng = function(lat, lng) {
@@ -30,5 +31,3 @@ var codeLatLng = function(lat, lng) {
     }
   });
 };
-
-google.maps.event.addDomListener(window, 'load', geoInitialize);

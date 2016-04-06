@@ -1,8 +1,8 @@
 extends layout
 
 block content
-  script
-    var objMeeting = #{meeting}
+  script(type='text/javascript').
+    var objMeeting = !{JSON.stringify(meeting)}
   .row.page-header: .col-lg-12
     h1 HuddleHere
       br
@@ -11,7 +11,7 @@ block content
     .col-md-8
       .panel.panel-primary
         .panel-heading
-          h2.panel-title Format: Brainstorming
+          h2.panel-title Format: #{meeting.format}
         .panel-body
           p Facilitator: #{meeting.leader}
           p Recorder: #{meeting.members[0]}
@@ -38,12 +38,15 @@ block content
         .panel-body
           strong Scheduled Start:
           br 
-          p #{parseTime(meeting.meetingDate)}
+          p#meetingStart
           br
           strong Scheduled End:
           br
-          p #{parseTime(meeting.endTime)}
-  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=findPreSelMap')
+          p#meetingEnd
+  script(src='/javascripts/coachTimes.js')
+  script(src='/javascripts/coachLoc.js')
   script(src='/javascripts/geo.js')
-  script(src='')
+  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=geoInitialize')
+  script(src='/javascripts/coachLoc.js')
+
   

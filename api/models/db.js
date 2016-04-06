@@ -8,7 +8,7 @@
 
 var mongoose = require('mongoose');
 
-var dbURI = 'mongodb://localhost/test';
+var dbURI = 'mongodb://localhost/HuddleHere';
 
 // grab production URI from heroku config
 if (process.env.NODE_ENV === 'production') {
