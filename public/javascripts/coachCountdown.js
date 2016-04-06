@@ -39,6 +39,13 @@
       var seconds = (t.seconds > 9) ? t.seconds : ("0" + t.seconds);
       
       clockArea.text(t.hours + ":" + minutes + ":" + seconds);
+      if ((t.total/1000) < 300) {
+        // 5 minutes remaining 
+        clockArea.css('color', '#888800');
+      } else if ((t.total/1000) < 120) {
+        // 2 minutes remaining
+        clockArea.css('color', '#880000');
+      }
       
       if (t.total < 0) {
         clearInterval(timeInterval);
