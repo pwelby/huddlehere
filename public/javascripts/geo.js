@@ -19,7 +19,7 @@ var codeLatLng = function(lat, lng) {
   }, function (results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       if (results[1]) {
-        return results[1];
+        return results[1].formatted_address;
       } else {
         console.log('GEOCODER: No results found');
         return "";
