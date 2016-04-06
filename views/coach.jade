@@ -13,8 +13,8 @@ block content
         .panel-heading
           h2.panel-title Format: Brainstorming
         .panel-body
-          p Facilitator: Jesse
-          p Recorder: John
+          p Facilitator: #{meeting.leader}
+          p Recorder: #{meeting.members[0]}
           h2 Objective: Improve the wheel
           .panel.panel-default
             .panel-heading
@@ -26,11 +26,11 @@ block content
         .panel-heading
           h2.panel-title Location
         .panel-body
-          img.img-responsive.img-rounded(src="http://maps.googleapis.com/maps/api/staticmap?center=42.653224,-71.325584&zoom=17&size=350x350&sensor=false&markers=42.653224,-71.325584&scale=2")
-          address
-            strong 1 University Ave.
+          img.img-responsive.img-rounded(src="http://maps.googleapis.com/maps/api/staticmap?center=#{meeting.location[0]},#{meeting.location[1]}&zoom=17&size=350x350&sensor=false&markers=42.653224,-71.325584&scale=2")
+          address#meetingLocation
+            strong#streetAddress
             br
-            | Lowell, MA 01854
+            span#cityState
             br
       .panel.panel-primary
         .panel-heading
@@ -38,10 +38,12 @@ block content
         .panel-body
           strong Scheduled Start:
           br 
-          p 2:00 PM
+          p #{parseTime(meeting.meetingDate)}
           br
           strong Scheduled End:
           br
-          p 2:30 PM
-            
-            
+          p #{parseTime(meeting.endTime)}
+  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=findPreSelMap')
+  script(src='/javascripts/geo.js')
+  script(src='')
+  

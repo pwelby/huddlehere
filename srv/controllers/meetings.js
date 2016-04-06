@@ -74,7 +74,7 @@ var renderMemberView = function(req, res, meetingInfo) {
  * Named callback for rendering the meeting schedule coach
  */
 var renderCoach = function(req, res, meetingInfo) {
-  res.render('planner-member', {
+  res.render('coach', {
     title: 'Meeting Schedule Coach - HuddleHere',
     meeting: meetingInfo
   });
