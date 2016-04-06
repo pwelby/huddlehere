@@ -10,7 +10,7 @@ var createCurrentLocCoords = [];
 function initPreSelMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
-    center: { lat: -34.397, lng: 150.644 }
+    center: { lat: 42.3600825, lng: -71.05888010000001 }
   });
 
   var geocoder = new google.maps.Geocoder();
