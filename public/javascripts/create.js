@@ -7,6 +7,26 @@
 
 var createCurrentLocCoords = [];
 
+//Handle member text fields add/remove
+$(function() {
+        var memberDiv = $('#memberText');
+        var i = $('#memberText p').size() + 1;
+        
+        $('#addMemberBtn').on('click', function() {
+                $('<p><input type="text" id="memberName' + i + '"size="20" name="memberName' + i +'" value="" placeholder="Member Name" /></label> <input type="button" id="rmvMemberBtn" value="Remove"></input></p>').appendTo(memberDiv);
+                i++;      
+                return false;
+        });
+        
+        $('body').on('click', '#rmvMemberBtn', function() { 
+                if( i > 2 ) {
+                        $(this).parents('p').remove();
+                        i--;
+                }
+                return false;
+        });
+});
+
 function initPreSelMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
@@ -102,5 +122,52 @@ $(document).ready(function() {
   $(function() {
     $("#datepicker").datepicker();
   });
+  $(function() {
+  
+  //submit create meeting form
+  $('#submitForm').on('click', function() {                   
+    var allMembers = ""
+    var size = $('#memberText p').size();
+   
+    //get all members
+    for(var i = 1; i <= size; i++)
+    {
+      member = "memberName" + i;
+      if(member == "")
+        return false
+      if(i == size)
+        allMembers += document.getElementById(member).value + ";undecided";
+      else
+        allMembers += document.getElementById(member).value + ";undecided,";
+    }
+       
+    var startDate = new Date($("#datepicker").val());
+    var endDate = new Date(startDate);
+    var startHours = parseInt($("#timeStart").val().split(":")[0]);
+    var startMinutes = parseInt($("#timeStart").val().split(":")[1]);
+    var endHours = parseInt($("#timeEnd").val().split(":")[0]);
+    var endMinutes = parseInt($("#timeEnd").val().split(":")[1]);
+
+    startDate.setHours($("#StartAM").is(":selected") ? startHours : startHours + 12);
+    startDate.setMinutes(startMinutes);
+
+    endDate.setHours($("#EndAM").is(":selected") ? endHours : endHours + 12);
+    endDate.setMinutes(endMinutes);
+    
+    //meeting object
+    var createMeeting = {
+        meetingDate: startDate,
+        endTime: endDate,
+        location: createCurrentLocCoords,
+        format: "NA",
+        leader: "NA",
+        members: allMembers,
+    };
+    
+    $.post(  window.location.host + "/api/meetings", function( createMeeting ) {
+    });
+    
+  });
+});
 
 }); //close document.ready
