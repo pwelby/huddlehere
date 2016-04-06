@@ -15,17 +15,19 @@ block content
         .panel-body
           p Facilitator: #{meeting.leader}
           p Recorder: #{meeting.members[0]}
-          h2 Objective: Improve the wheel
-          .panel.panel-default
-            .panel-heading
-              h2.panel-title Starting Point
-            .panel-body
-              em If it ain't broke, don't fix it
+          h2 Agenda
+          each item in meeting.agenda
+            .panel.panel-default
+              .panel-heading
+                h2.panel-title= item.title
+              .panel-body
+                em= item.description
     .col-md-4
       .panel.panel-primary
         .panel-heading
           h2.panel-title Location
         .panel-body
+          //- Note: This image calls the google maps API for a map image centered at the meeting location
           img.img-responsive.img-rounded(src="http://maps.googleapis.com/maps/api/staticmap?center=#{meeting.location[0]},#{meeting.location[1]}&zoom=17&size=350x350&sensor=false&markers=42.653224,-71.325584&scale=2")
           address#meetingLocation
             strong#streetAddress
