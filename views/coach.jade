@@ -46,8 +46,13 @@ block content
           strong Scheduled End:
           br
           p#meetingEnd
+          br
+          strong Time Remaining:
+          br
+          p#countDownClock
   script(src='/javascripts/geo.js')
   script(src='/javascripts/coachTimes.js')
   script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=geoInitialize')
+  script(src='/javascripts/coachCountdown.js')
 
   
