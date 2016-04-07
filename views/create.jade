@@ -57,6 +57,15 @@ block content
         .panel-heading
           h2.panel-title LOCATION
         .panel-body
-            div(id = "map" style = "width:500px;height:380px;")     
+            div(id = "map" style = "width:500px;height:380px;")
+      .panel.panel-primary
+        .panel-heading
+          h2.panel-title MEMBERS
+        .panel-body
+          h4        
+            input(type = "button" id="addMemberBtn" value = "Add")        
+          div(id="memberText")
+            p()
+              input(type="text" id="memberName1" size="20" name="memberName1" value="" placeholder="Member Name")
   script(src='/javascripts/create.js')                
   script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=findPreSelMap')
