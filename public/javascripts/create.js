@@ -154,14 +154,17 @@ $(document).ready(function() {
     endDate.setHours($("#EndAM").is(":selected") ? endHours : endHours + 12);
     endDate.setMinutes(endMinutes);
     
+    var meetLeader = $('#memberLead').val();
+    var meetForm = $('#meetingType').val();
+    
     //meeting object
     var locCoords = parseInt(createCurrentLocCoords[0]) + "," + parseInt(createCurrentLocCoords[1]);
     var createMeeting = {
         meetingDate: startDate,
         endTime: endDate,
         location: locCoords,
-        format: "NA",
-        leader: "NA",
+        format: meetForm,
+        leader: meetLeader,
         members: allMembers,
     };
     $.post(window.location.protocol + "//" + window.location.host + "/api/meetings", createMeeting, function(data, textStatus, jqXHR){console.log("Success");}, "json");
