@@ -34,7 +34,12 @@ block content
         .panel-heading
           h2.panel-title DETAILS
         .panel-body
-          h4 Date/Time
+          h4 Meeting Type
+          .dropdown
+            select(name="meetingType" id="meetingType")
+              option(value='Default', id="default", selected) Default
+              option(value='Brainstorm', id="brainstorm") Brainstorm
+          h4 Date/Time    
           input(type='text', name='mdate', id='datepicker')
           h4 Start
           input(type='text', id="timeStart")
@@ -62,7 +67,9 @@ block content
         .panel-heading
           h2.panel-title MEMBERS
         .panel-body
-          h4        
+          h4 Leader 
+          input(type="text" id="memberLead" size="20" name="memberLead" value="" placeholder="Leader Name")
+          h4 Members       
             input(type = "button" id="addMemberBtn" value = "Add")        
           div(id="memberText")
             p()
