@@ -155,18 +155,16 @@ $(document).ready(function() {
     endDate.setMinutes(endMinutes);
     
     //meeting object
+    var locCoords = parseInt(createCurrentLocCoords[0]) + "," + parseInt(createCurrentLocCoords[1]);
     var createMeeting = {
         meetingDate: startDate,
         endTime: endDate,
-        location: createCurrentLocCoords,
+        location: locCoords,
         format: "NA",
         leader: "NA",
         members: allMembers,
     };
-    
-    $.post(  window.location.host + "/api/meetings", function( createMeeting ) {
-    });
-    
+    $.post(window.location.protocol + "//" + window.location.host + "/api/meetings", createMeeting, function(data, textStatus, jqXHR){console.log("Success");}, "json");
   });
 });
 
