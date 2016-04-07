@@ -169,7 +169,7 @@ $(document).ready(function() {
     };
     $.post(window.location.protocol + "//" + window.location.host + "/api/meetings", createMeeting, function(data, textStatus, jqXHR) {
       var pagePath = "/m/" + data._id + "/l";
-      window.prompt("Here is your meeting page URL:", window.location.protocol + "//" + window.location.host + pagePath);
+      window.prompt("Here is your UNIQUE meeting page URL (CTRL+C, ENTER to copy):", window.location.protocol + "//" + window.location.host + pagePath);
     }, "json");
   });
 });
