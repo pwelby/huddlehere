@@ -34,7 +34,12 @@ block content
         .panel-heading
           h2.panel-title DETAILS
         .panel-body
-          h4 Date/Time
+          h4 Meeting Type
+          .dropdown
+            select(name="meetingType" id="meetingType")
+              option(value='Default', id="default", selected) Default
+              option(value='Brainstorm', id="brainstorm") Brainstorm
+          h4 Date/Time    
           input(type='text', name='mdate', id='datepicker')
           h4 Start
           input(type='text', id="timeStart")
@@ -57,6 +62,17 @@ block content
         .panel-heading
           h2.panel-title LOCATION
         .panel-body
-            div(id = "map" style = "width:500px;height:380px;")     
+            div(id = "map" style = "width:500px;height:380px;")
+      .panel.panel-primary
+        .panel-heading
+          h2.panel-title MEMBERS
+        .panel-body
+          h4 Leader 
+          input(type="text" id="memberLead" size="20" name="memberLead" value="" placeholder="Leader Name")
+          h4 Members       
+            input(type = "button" id="addMemberBtn" value = "Add")        
+          div(id="memberText")
+            p()
+              input(type="text" id="memberName1" size="20" name="memberName1" value="" placeholder="Member Name")
   script(src='/javascripts/create.js')                
   script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=findPreSelMap')

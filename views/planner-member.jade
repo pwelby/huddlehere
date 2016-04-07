@@ -1,6 +1,8 @@
 extends layout
 
 block content
+  script(type='text/javascript').
+    var objMeeting = !{JSON.stringify(meeting)}
   .row.page-header: .col-lg-12
     h1 HuddleHere
      br
@@ -19,11 +21,11 @@ block content
           span#memEndTime 3:00 PM
           br
           h4 Availability
-          input(type="checkbox", name = "Available")
-          | &nbsp; Available &nbsp;
+          input(type="radio", name="myStatus" id="statAvailable") &nbsp; Available &nbsp;
           br
-          input(type="checkbox", name = "Unavailable")
-          | &nbsp; Unavailable &nbsp;
+          input(type="radio", name="myStatus") &nbsp; Unavailable &nbsp;
+          br
+          input(type='button', id="submitForm", value="Submit")
     .col-xs-12.col-sm-6
       .panel.panel-primary
         .panel-heading
@@ -61,3 +63,4 @@ block content
           .col-xs-12.list-group-item
             h4 Agenda item three  
             a.btn.btn-default Add Comment
+  script(src='/public/javascripts/memberPost.js')
