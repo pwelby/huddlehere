@@ -117,7 +117,7 @@ $(document).ready(function() {
     }
   });
 
-  $('.dropdown-toggle').dropdown()
+  $('.dropdown-toggle').dropdown();
 
   $(function() {
     $("#datepicker").datepicker();
@@ -126,7 +126,7 @@ $(document).ready(function() {
   
   //submit create meeting form
   $('#submitForm').on('click', function() {                   
-    var allMembers = ""
+    var allMembers = "";
     var size = $('#memberText p').size();
    
     //get all members
@@ -134,7 +134,7 @@ $(document).ready(function() {
     {
       member = "memberName" + i;
       if(member == "")
-        return false
+        return false;
       if(i == size)
         allMembers += document.getElementById(member).value + ";undecided";
       else
@@ -164,7 +164,10 @@ $(document).ready(function() {
         leader: "NA",
         members: allMembers,
     };
-    $.post(window.location.protocol + "//" + window.location.host + "/api/meetings", createMeeting, function(data, textStatus, jqXHR){console.log("Success");}, "json");
+    $.post(window.location.protocol + "//" + window.location.host + "/api/meetings", createMeeting, function(data, textStatus, jqXHR) {
+      var pagePath = "/m/" + data._id + "/l";
+      window.prompt("Here is your meeting page URL:", window.location.protocol + "//" + window.location.host + pagePath);
+    }, "json");
   });
 });
 
