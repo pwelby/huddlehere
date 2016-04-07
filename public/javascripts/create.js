@@ -158,7 +158,7 @@ $(document).ready(function() {
     var meetForm = $('#meetingType').val();
     
     //meeting object
-    var locCoords = parseInt(createCurrentLocCoords[0]) + "," + parseInt(createCurrentLocCoords[1]);
+    var locCoords = parseFloat(createCurrentLocCoords[0]) + "," + parseFloat(createCurrentLocCoords[1]);
     var createMeeting = {
         meetingDate: startDate,
         endTime: endDate,

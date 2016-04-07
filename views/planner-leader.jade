@@ -1,7 +1,8 @@
 extends layout
 
 block content
-  
+  script(type='text/javascript').
+    var objMeeting = !{JSON.stringify(meeting)}
   .row
     .col-lg-6
       h1 HuddleHere
@@ -14,7 +15,7 @@ block content
           h2.panel-title Format: #{meeting.format}
         .panel-body
           p Facilitator: #{meeting.leader}
-          p Recorder: #{meeting.members[0]}
+          p Recorder: #{meeting.members[0].split(';')[0]}
     .col-xs-12.col-sm-2
     .col-xs-12.col-sm-4.location-map
       .panel.panel-primary
@@ -38,17 +39,17 @@ block content
           .panel-heading
             h2.panel-title Location:
           .panel-body
-            p 220 Pawtucket St
-            p Lowell, MA 01854 
+            p#streetAddress
+            p#cityState
       .row
         .panel.panel-primary
           .panel-heading
             h2.panel-title Time:
           .panel-body
             p Start:&nbsp;
-              span#leadStartTime 2:00 PM
+              span#meetingStart
             p End:&nbsp;
-              span#leadEndTime 3:00 PM
+              span#meetingEnd
       .row
         .panel.panel-primary
           .panel-heading
@@ -58,3 +59,6 @@ block content
               p= member.split(';')[0] + ': '
                 span.memberStatus= member.split(';')[1]
   script(src='/javascripts/planner-leader.js') 
+  script(src='/javascripts/geo.js')
+  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=geoInitialize')
+  script(src='/javascripts/coachTimes.js')
