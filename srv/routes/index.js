@@ -10,17 +10,17 @@ var ctrlMeetings = require('../controllers/meetings');
 
 // Tool page routes 
 router.get('/', function(req, res, next) {
-  res.render('create', { title: 'HuddleHere ALPHA' });
+  res.render('create', { title: 'HuddleHere' });
 });
 router.get('/planner-leader', function(req, res, next) {
-  res.render('planner-leader', { title: 'HuddleHere ALPHA' });
+  res.render('planner-leader', { title: 'HuddleHere' });
 });
 router.get('/planner-member', function(req, res, next) {
-  res.render('planner-member', { title: 'HuddleHere ALPHA' });
+  res.render('planner-member', { title: 'HuddleHere' });
 });
 
 router.get('/coach', function(req, res, next) {
-  res.render('coach', {title: 'HuddleHere ALPHA'});
+  res.render('coach', {title: 'HuddleHere'});
 });
 
 // Meeting planner routes
