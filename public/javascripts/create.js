@@ -6,6 +6,22 @@
  */
 
 var createCurrentLocCoords = [];
+var selLoc;
+
+$( "#createMap" ).last().addClass( "collapse" );
+$( "#createMembers" ).last().addClass( "collapse" );
+$( "#createDetails" ).last().addClass( "collapse" );
+$( "#createURL" ).last().addClass( "collapse" );
+
+$('body').on('click', '#slideLocation', function() {
+  doSlide("#createLocation", "#createMap", selLoc);
+});
+$('body').on('click', '#slideMap', function() {
+  doSlide("#createMap", "#createDetails");
+});
+$('body').on('click', '#slideDetails', function() {
+  doSlide("#createDetails", "#createMembers");
+});
 
 //Handle member text fields add/remove
 $(function() {
@@ -29,37 +45,40 @@ $(function() {
 
 function initPreSelMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
+    zoom: 15,
     center: { lat: 42.3600825, lng: -71.05888010000001 }
   });
 
-  var geocoder = new google.maps.Geocoder();
-
-  document.getElementById('submitLoc').addEventListener('click', function() {
-    geocodeAddress(geocoder, map);
-  });
-}
-
-function geocodeAddress(geocoder, resultsMap) {
   var street = document.getElementById('preSelTextBoxStreet').value;
   var city = document.getElementById('preSelTextBoxCity').value;
   var state = document.getElementById('preSelTextBoxState').value;
-  address = street + "," + city + "," + state;
-  geocoder.geocode({ 'address': address }, function(results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
-      createCurrentLocCoords[0] = results[0].geometry.location.lat();
-      createCurrentLocCoords[1] = results[0].geometry.location.lng();
-      resultsMap.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-        map: resultsMap,
-        position: results[0].geometry.location
-      });
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
-}
+  
+  var geocoder = new google.maps.Geocoder();
 
+  if(street != ""&& city != "" && state != "")
+    geocodeAddress(geocoder, map);
+
+
+  function geocodeAddress(geocoder, resultsMap) {
+    address = street + "," + city + "," + state;
+    geocoder.geocode({ 'address': address }, function(results, status) {
+      if (status === google.maps.GeocoderStatus.OK) 
+      {
+        createCurrentLocCoords[0] = results[0].geometry.location.lat();
+        createCurrentLocCoords[1] = results[0].geometry.location.lng();
+        resultsMap.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+          map: resultsMap,
+          position: results[0].geometry.location
+        });
+      } 
+      else 
+      {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+}
 function initNearbyMap() {
 
   var myOptions = {
@@ -74,7 +93,13 @@ function initNearbyMap() {
     browserSupportFlag = true;
     navigator.geolocation.getCurrentPosition(function(position) {
       nearbyLoc = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      createCurrentLocCoords[0] = position.coords.latitude;
+      createCurrentLocCoords[1] = position.coords.longitude;
       map.setCenter(nearbyLoc);
+     var marker = new google.maps.Marker({
+        map: map,
+        position: nearbyLoc
+      });
     }, function() {
       handleNoGeolocation(browserSupportFlag);
     });
@@ -97,23 +122,20 @@ function initNearbyMap() {
   }
 }
 
-function findPreSelMap() {
-  initPreSelMap();
-}
-
 // Preselect or nearby textbox enable
 $(document).ready(function() {
-  initNearbyMap();
   $(".locRadio").click(function() {
+    
     $("#preSelTextBoxStreet").attr("disabled", true);
     $("#preSelTextBoxCity").attr("disabled", true);
     $("#preSelTextBoxState").attr("disabled", true);
-    google.maps.event.addDomListener(window, 'load', initNearbyMap());
+    selLoc = 0;
+    
     if ($("input[name=loc]:checked").val() == "preSel") {
       $("#preSelTextBoxStreet").attr("disabled", false);
       $("#preSelTextBoxCity").attr("disabled", false);
       $("#preSelTextBoxState").attr("disabled", false);
-      findPreSelMap();
+      selLoc = 1;
     }
   });
 
@@ -125,7 +147,7 @@ $(document).ready(function() {
   $(function() {
   
   //submit create meeting form
-  $('#submitForm').on('click', function() {                   
+  $('#slideMembers').on('click', function() {                   
     var allMembers = "";
     var size = $('#memberText p').size();
    
@@ -133,12 +155,17 @@ $(document).ready(function() {
     for(var i = 1; i <= size; i++)
     {
       member = "memberName" + i;
-      if(member == "")
-        return false;
-      if(i == size)
-        allMembers += document.getElementById(member).value + ";undecided";
+      if(document.getElementById(member).value == "")
+      {
+        //do nothing
+      }
       else
-        allMembers += document.getElementById(member).value + ";undecided,";
+      {
+        if(i == size)
+          allMembers += document.getElementById(member).value + ";undecided";
+        else
+          allMembers += document.getElementById(member).value + ";undecided,";
+      }
     }
        
     var startDate = new Date($("#datepicker").val());
@@ -169,7 +196,14 @@ $(document).ready(function() {
     };
     $.post(window.location.protocol + "//" + window.location.host + "/api/meetings", createMeeting, function(data, textStatus, jqXHR) {
       var pagePath = "/m/" + data._id + "/l";
-      window.prompt("Here is your UNIQUE meeting page URL (CTRL+C, ENTER to copy):", window.location.protocol + "//" + window.location.host + pagePath);
+      //window.prompt("Here is your UNIQUE meeting page URL (CTRL+C, ENTER to copy):", window.location.protocol + "//" + window.location.host + pagePath);
+      
+      uniqueURL = window.location.protocol + "//" + window.location.host + pagePath;
+      $("#uniqURL").attr("href", uniqueURL);
+      $("#uniqURL").attr("target", "_blank");
+      $( "#uniqURL" ).html( uniqueURL );
+      doSlide("#createMembers", "#createURL");
+      
     }, "json");
   });
 });
