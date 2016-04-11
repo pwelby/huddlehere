@@ -1,3 +1,9 @@
+/**
+ * File: /public/javascripts/panelSlide.js
+ * Author: Patrick Quaratiello
+ * 
+ * Handles panel slides on create page and map location information
+ */
 
 doSlide = function(currentPanel, nextPanel, selectedLocation) {
   
