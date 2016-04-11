@@ -31,7 +31,8 @@ block content
               input(type"text" placeholder = "City" id = "preSelTextBoxCity" disabled = "")
             h4
               input(type"text" placeholder = "State" id = "preSelTextBoxState" disabled = "")
-        input(type='button', id="slideLocation", value="Next")
+        div(style = "float: right;")
+          input(type='button', id="slideLocation", value="Next")
       div(id = "createMap")
         .h4 Does this look correct?
         .panel.panel-primary.panel-map
@@ -39,7 +40,8 @@ block content
             h2.panel-title LOCATION
           .panel-body(style="height:400px")
             div(id = "map" style = "width:100%;height:90%;")
-        input(type='button', id="slideMap", value="Next")
+        div(style = "float: right;")
+          input(type='button', id="slideMap", value="Next")
       div(id="createDetails")
         .h4 It's all about the details...
         .panel.panel-primary.panel-details
@@ -67,7 +69,8 @@ block content
               | AM &nbsp;
               input(type="radio" name="EndAM-PM" value="EndPM")
               | PM
-        input(type='button', id="slideDetails", value="Next")
+        div(style = "float: right;")
+          input(type='button', id="slideDetails", value="Next")
       div(id = "createMembers")
         .h4 Lets get some member info...
         .panel.panel-primary.panel-members
@@ -81,14 +84,18 @@ block content
             div(id="memberText")
               p()
             input(type="text" id="memberName1" size="20" name="memberName1" value="" placeholder="Member Name")
-        input(type='button', id="slideMembers", value="Done!")
+        div(style = "float: right;")
+          input(type='button', id="slideMembers", value="Done!")
       div(id = "createURL")
         .h4 Here you go!
         .panel.panel-primary.panel-URL
           .panel-heading YOUR URL
-          .panel-body(style="height:400px")
-           URL
-        input(type='button', id="slideURL", value="Next")
+          .panel-body(style="height:400px;word-break:break-all;overflow:scroll")
+            .h4 Meeting Planner: Leader
+            .div
+              a(id = "uniqURL")
+        div(style = "float: right;")
+          input(type='button', id="slideURL", value="Next")
   .col-md-4
   script(src='/javascripts/panelSlide.js')
   script(src='/javascripts/create.js')                
