@@ -56,16 +56,20 @@ block content
             h4 Date/Time    
             input(type='text', name='mdate', id='datepicker')
             h4 Start
-            input(type='text', id="timeStart")
+            input.time-field(type='text', id="timeStartHours", maxlength="2")
+            | &nbsp;:&nbsp;
+            input.time-field(type='text', id="timeStartMinutes", maxlength="2", value="00")
             h4
-              input(type="radio" name="StartAM-PM" value="StartAM" id="StartAM")
+              input(type="radio" name="StartAM-PM" value="StartAM" id="StartAM" checked)
               | AM &nbsp;
               input(type="radio" name="StartAM-PM" value="StartPM")
               | PM
             h4 End
-            input(type='text', id="timeEnd")
+            input.time-field(type='text', id="timeEndHours", maxlength="2")
+            | &nbsp;:&nbsp;
+            input.time-field(type='text', id="timeEndMinutes", maxlength="2", value="00")
             h4
-              input(type="radio" name="EndAM-PM" value="EndAM" id="EndAM")
+              input(type="radio" name="EndAM-PM" value="EndAM" id="EndAM" checked)
               | AM &nbsp;
               input(type="radio" name="EndAM-PM" value="EndPM")
               | PM
