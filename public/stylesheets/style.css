@@ -27,8 +27,16 @@ span.notavailable {
   color: #161616;
 }
 
+input.time-field {
+  width: 2em;
+}
+
 #countDownClock {
   font-size: 2.5em;
+}
+
+#agendaCountDownClock {
+  font-size: 1.5em;
 }
 
 .review {padding-bottom: 5px;}

@@ -170,16 +170,33 @@ $(document).ready(function() {
        
     var startDate = new Date($("#datepicker").val());
     var endDate = new Date(startDate);
-    var startHours = parseInt($("#timeStart").val().split(":")[0]);
-    var startMinutes = parseInt($("#timeStart").val().split(":")[1]);
-    var endHours = parseInt($("#timeEnd").val().split(":")[0]);
-    var endMinutes = parseInt($("#timeEnd").val().split(":")[1]);
+    var startHours = parseInt($("#timeStartHours").val());
+    var startMinutes = parseInt($("#timeStartMinutes").val());
+    var endHours = parseInt($("#timeEndHours").val());
+    var endMinutes = parseInt($("#timeEndMinutes").val());
 
-    startDate.setHours($("#StartAM").is(":selected") ? startHours : startHours + 12);
+    if (startHours < 12) {
+      if (!$("#StartAM").is(":selected")) {
+        // we want hours 1-11 PM, so add 12
+        startHours = startHours + 12;
+      }
+    } else if ($("#StartAM").is(":selected")) {
+      // we want 12am, which is 0 hours
+      startHours = 0;
+    }
+    
+    startDate.setHours(startHours);
     startDate.setMinutes(startMinutes);
 
-    endDate.setHours($("#EndAM").is(":selected") ? endHours : endHours + 12);
-    endDate.setMinutes(endMinutes);
+    if (endHours < 12) {
+      if (!$("#endAM").is(":selected")) {
+        // we want hours 1-11 PM, so add 12
+        endHours = endHours + 12;
+      }
+    } else if ($("#EndAM").is(":selected")) {
+      // we want 12am, which is 0 hours
+      endHours = 0;
+    }
     
     var meetLeader = $('#memberLead').val();
     var meetForm = $('#meetingType').val();
