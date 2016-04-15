@@ -198,6 +198,9 @@ $(document).ready(function() {
       endHours = 0;
     }
     
+    endDate.setHours(endHours);
+    endDate.setMinutes(endMinutes);
+    
     var meetLeader = $('#memberLead').val();
     var meetForm = $('#meetingType').val();
     
