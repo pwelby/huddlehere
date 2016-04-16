@@ -54,7 +54,7 @@ block content
         .panel-heading
           h2.panel-title Location map
         .panel-body
-          img.img-responsive.img-rounded(src="http://maps.googleapis.com/maps/api/staticmap?center=#{meeting.location[0]},#{meeting.location[1]}&zoom=17&size=350x350&sensor=false&markers=#{meeting.location[0]},#{meeting.location[1]}&scale=2")
+          img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=#{meeting.location[0]},#{meeting.location[1]}&zoom=17&size=350x350&sensor=false&markers=#{meeting.location[0]},#{meeting.location[1]}&scale=2')
   .row
     .col-xs-12
       .panel.panel-primary.agenda-panel
