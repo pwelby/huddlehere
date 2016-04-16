@@ -39,6 +39,10 @@ input.time-field {
   font-size: 1.5em;
 }
 
+.error {
+  color: #cc0000
+}
+
 .review {padding-bottom: 5px;}
 .panel-body.review-container {padding-top: 0;}
 .review-header {margin-bottom: 10px;}
