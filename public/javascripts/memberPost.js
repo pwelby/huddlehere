@@ -19,7 +19,7 @@ $('#submitForm').click(function (e) {
   var apiPath = "/api/meetings/" + meetingId;
   
   // get current status
-  if ($("#statAvailable").is(":selected")) {
+  if ($("#statAvailable").is(":checked")) {
     currStatus = "Available";
   } else {
     currStatus = "Unavailable";
