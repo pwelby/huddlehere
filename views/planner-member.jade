@@ -13,18 +13,24 @@ block content
         .panel-heading
           h2.panel-title Time and Availability
         .panel-body
+          h4 I am:
+          .dropdown
+            select(name='memberPicker' id='memberPicker')
+              option(value='defaultOp' selected) Choose...
+              each member in meeting.members
+                option(value="#{member.split(';')[0]}")= member.split(';')[0]
           h4 Start Time
           p
-          span#meetingStart
+            span#meetingStart
           h4 End Time
           p
-          span#meetingEnd
+            span#meetingEnd
           br
           h4 Availability
-          input(type="radio", name="myStatus" id="statAvailable")
+          input(type="radio", name="myStatus" class="statusRadio" value="Available" id="statAvailable" checked)
           | Available
           br
-          input(type="radio", name="myStatus")
+          input(type="radio", name="myStatus" class="statusRadio" value="Unavailable")
           | Unavailable
           br
           input(type='button', id="submitForm", value="Submit")
@@ -68,3 +74,4 @@ block content
   script(src='/javascripts/geo.js')
   script(src='/javascripts/coachTimes.js')
   script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=geoInitialize')
+  script(src='/javascripts/memberPost.js')
