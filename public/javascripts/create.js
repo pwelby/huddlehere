@@ -8,19 +8,125 @@
 var createCurrentLocCoords = [];
 var selLoc;
 
+//collapse the other panels on start
 $( "#createMap" ).last().addClass( "collapse" );
 $( "#createMembers" ).last().addClass( "collapse" );
 $( "#createDetails" ).last().addClass( "collapse" );
 $( "#createURL" ).last().addClass( "collapse" );
 
-$('body').on('click', '#slideLocation', function() {
-  doSlide("#createLocation", "#createMap", selLoc);
-});
-$('body').on('click', '#slideMap', function() {
-  doSlide("#createMap", "#createDetails");
-});
-$('body').on('click', '#slideDetails', function() {
-  doSlide("#createDetails", "#createMembers");
+//validation on button presses
+$(document).ready(function() {
+ 
+  //create location form validation
+  $("#createLocForm").validate({
+    rules: {
+      preSelTextBoxStreet: {
+        "required" : true
+      },
+      preSelTextBoxCity: {
+        "required" : true
+      },
+      preSelTextBoxState: {
+        "required" : true
+      },
+    },
+    messages: {
+        preSelTextBoxStreet: {
+            required : "Please enter a valid street address."
+        },
+        preSelTextBoxCity: {
+            required : "Please enter a valid city."
+        },
+        preSelTextBoxState: {
+            required : "Please enter a valid state."
+        }
+    },
+    errorElement: "div",
+    errorLabelContainer: "#locErrBox"
+  });
+  
+  //create member form validation
+  $("#createDetForm").validate({
+    rules: {
+      datepicker: {
+        "required" : true
+      },
+      timeStartHours: {
+        "required" : true
+      },
+      timeStartMinutes: {
+        "required" : true
+      },
+      timeEndHours: {
+        "required" : true
+      },
+      timeEndMinutes: {
+        "required" : true
+      },
+    },
+    messages: {
+        datepicker: {
+            required : "Please enter a valid date."
+        },
+        timeStartHours: {
+            required : "Please enter a valid start hour."
+        },
+        timeStartMinutes: {
+            required : "Please enter a valid start minute."
+        },
+        timeEndHours: {
+            required : "Please enter a valid end hour."
+        },
+        timeEndMinutes: {
+            required : "Please enter a valid end minute."
+        }
+    },
+    errorElement: "div",
+    errorLabelContainer: "#detErrBox"
+  });
+  
+  //create member form validation
+  $("#createMembForm").validate({
+    rules: {
+      memberLead: {
+        "required" : true
+      }
+    },
+    messages: {
+        memberLead: {
+            required : "The leader field is required!"
+        }
+    },
+    errorElement: "div",
+    errorLabelContainer: "#memErrBox"
+  });
+      
+  $('body').on('click', '#slideLocation', function() {
+    if($("#createLocForm").valid() === true)
+    {
+      doSlide("#createLocation", "#createMap", selLoc);
+    }
+  });
+
+  $('body').on('click', '#slideMap', function() {
+    doSlide("#createMap", "#createDetails");
+  });
+
+  $('body').on('click', '#slideDetails', function() {
+    if($("#createDetForm").valid() === true)
+    {
+      var date = new Date($("#datepicker").val());
+      var today = new Date();
+      if(date - today < 0)
+        console.log("You're in the past?");
+      else
+        doSlide("#createDetails", "#createMembers");
+    }
+  });
+  
+    $('body').on('click', '#slideBackLoc', function() {
+    doSlide("#createMap", "#createLocation");
+  });
 });
 
 //Handle member text fields add/remove
@@ -126,6 +232,12 @@ function initNearbyMap() {
 $(document).ready(function() {
   $(".locRadio").click(function() {
     
+    $('#preSelTextBoxStreet').removeClass('error');
+    $('#preSelTextBoxCity').removeClass('error');
+    $('#preSelTextBoxState').removeClass('error');
+    $( "#preSelTextBoxStreet-error" ).remove();
+    $( "#preSelTextBoxCity-error" ).remove();
+    $( "#preSelTextBoxState-error" ).remove();
     $("#preSelTextBoxStreet").attr("disabled", true);
     $("#preSelTextBoxCity").attr("disabled", true);
     $("#preSelTextBoxState").attr("disabled", true);
@@ -142,32 +254,34 @@ $(document).ready(function() {
   $('.dropdown-toggle').dropdown();
 
   $(function() {
-    $("#datepicker").datepicker();
+    $("#datepicker").datepicker({onClose: function() { this.focus(); }});
   });
   $(function() {
   
   //submit create meeting form
-  $('#slideMembers').on('click', function() {                   
-    var allMembers = "";
-    var size = $('#memberText p').size();
-   
-    //get all members
-    for(var i = 1; i <= size; i++)
+  $('#slideMembers').on('click', function() {
+   if($("#createMembForm").valid() === true)
     {
-      member = "memberName" + i;
-      if(document.getElementById(member).value == "")
+      var allMembers = "";
+      var size = $('#memberText p').size();
+     
+      //get all members
+      for(var i = 1; i <= size; i++)
       {
-        //do nothing
-      }
-      else
-      {
-        if(i == size)
-          allMembers += document.getElementById(member).value + ";undecided";
+
+        member = "memberName" + i;
+        if(document.getElementById(member).value == "")
+        {
+          //do nothing
+        }
         else
-          allMembers += document.getElementById(member).value + ";undecided,";
+        {
+          if(i == size)
+            allMembers += document.getElementById(member).value + ";undecided";
+          else
+            allMembers += document.getElementById(member).value + ";undecided,";
+        }
       }
-    }
-       
     var startDate = new Date($("#datepicker").val());
     var endDate = new Date(startDate);
     var startHours = parseInt($("#timeStartHours").val());
@@ -225,6 +339,7 @@ $(document).ready(function() {
       doSlide("#createMembers", "#createURL");
       
     }, "json");
+   }
   });
 });
 

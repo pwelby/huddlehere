@@ -8,7 +8,6 @@
 doSlide = function(currentPanel, nextPanel, selectedLocation) {
   
   function runSlide() {
-    console.log("Here!");
     // get effect type from
     var selectedEffect = "slide";
     // most effect types need no options passed by default
