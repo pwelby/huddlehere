@@ -18,6 +18,7 @@ var agendaItemSchema = new mongoose.Schema({
   title: {type: String, required: true},
   description: {type: String, required: true},
   duration: {type: Number, required: true},
+  purpose: {type: String, required: true},
   comments: {type: [agendaCommentSchema], required: false}
 });
 
