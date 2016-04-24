@@ -9,20 +9,42 @@ block content
       small &nbsp;Make Group Projects Easy!
   hr
   .row
-    .col-xs-12.col-sm-6
+    .col-xs-12.col-sm-4
+      .panel.panel-primary
+        .panel-heading
+          h2.panel-title Team Status:
+        .panel-body
+          each member in meeting.members
+            p= member.split(';')[0] + ': '
+              span.memberStatus= member.split(';')[1]
+    .col-xs-12.col-sm-4
       .panel.panel-primary
         .panel-heading
           h2.panel-title Format: #{meeting.format}
         .panel-body
-          p Facilitator: #{meeting.leader}
-          p Recorder: #{meeting.members[0].split(';')[0]}
-    .col-xs-12.col-sm-2
+          p Leader: #{meeting.leader}
+      .panel.panel-primary
+        .panel-heading
+          h2.panel-title Time:
+        .panel-body
+          p Start:&nbsp;
+            span#meetingStart
+          p End:&nbsp;
+            span#meetingEnd
+      .panel.panel-primary
+        .panel-heading
+          h2.panel-title Location:
+        .panel-body
+          p#streetAddress
+          p#cityState
     .col-xs-12.col-sm-4.location-map
       .panel.panel-primary
         .panel-heading
           h2.panel-title Map:
         .panel-body
-          img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=#{meeting.location[0]},#{meeting.location[1]}&zoom=17&size=350x350&sensor=false&markers=#{meeting.location[0]},#{meeting.location[1]}&scale=2')
+          img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=#{meeting.location[0]},#{meeting.location[1]}&zoom=17&size=350x350&sensor=false&markers=#{meeting.location[0]},#{meeting.location[1]}&scale=2') 
+  .row
+    .col-xs-12.col-sm-4
     .col-xs-12.col-sm-8
       .panel.panel-primary
         .panel-heading
@@ -30,34 +52,10 @@ block content
         .panel-body
           .col-xs-12.list-group-item
             h4 Agenda Items --- Agenda Descriptions: 
-              input(type = "button" id="addAgendaBtn" value = "Add")
+              input(type = "button" id="addAgendaBtn" value = "Create")
             .div
-              div(id="agendaItems")
-    .col-xs.col-sm-4
-      .row
-        .panel.panel-primary
-          .panel-heading
-            h2.panel-title Location:
-          .panel-body
-            p#streetAddress
-            p#cityState
-      .row
-        .panel.panel-primary
-          .panel-heading
-            h2.panel-title Time:
-          .panel-body
-            p Start:&nbsp;
-              span#meetingStart
-            p End:&nbsp;
-              span#meetingEnd
-      .row
-        .panel.panel-primary
-          .panel-heading
-            h2.panel-title Team Status:
-          .panel-body
-            each member in meeting.members
-              p= member.split(';')[0] + ': '
-                span.memberStatus= member.split(';')[1]
+              div(id="agendaItems")    
+          input(type='button', id="submitAgenda", value="Submit")
   script(src='/javascripts/planner-leader.js') 
   script(src='/javascripts/geo.js')
   script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=geoInitialize')

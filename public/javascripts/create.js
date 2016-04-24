@@ -32,13 +32,13 @@ $(document).ready(function() {
     },
     messages: {
         preSelTextBoxStreet: {
-            required : "Please enter a valid street address."
+            "required" : "Please enter a valid street address."
         },
         preSelTextBoxCity: {
-            required : "Please enter a valid city."
+            "required" : "Please enter a valid city."
         },
         preSelTextBoxState: {
-            required : "Please enter a valid state."
+            "required" : "Please enter a valid state."
         }
     },
     errorElement: "div",
@@ -50,6 +50,7 @@ $(document).ready(function() {
     rules: {
       datepicker: {
         "required" : true
+        "inFuture" : true
       },
       timeStartHours: {
         "required" : true
@@ -66,19 +67,20 @@ $(document).ready(function() {
     },
     messages: {
         datepicker: {
-            required : "Please enter a valid date."
+            "required" : "Please enter a valid date."
+            "inFuture" : "Please make sure the date today or later."
         },
         timeStartHours: {
-            required : "Please enter a valid start hour."
+            "required" : "Please enter a valid start hour."
         },
         timeStartMinutes: {
-            required : "Please enter a valid start minute."
+            "required" : "Please enter a valid start minute."
         },
         timeEndHours: {
-            required : "Please enter a valid end hour."
+            "required" : "Please enter a valid end hour."
         },
         timeEndMinutes: {
-            required : "Please enter a valid end minute."
+            "required" : "Please enter a valid end minute."
         }
     },
     errorElement: "div",
@@ -94,7 +96,7 @@ $(document).ready(function() {
     },
     messages: {
         memberLead: {
-            required : "The leader field is required!"
+            "required" : "The leader field is required!"
         }
     },
     errorElement: "div",
@@ -115,8 +117,10 @@ $(document).ready(function() {
   $('body').on('click', '#slideDetails', function() {
     if($("#createDetForm").valid() === true)
     {
+      
       var date = new Date($("#datepicker").val());
       var today = new Date();
+      
       if(date - today < 0)
         console.log("You're in the past?");
       else
@@ -128,6 +132,8 @@ $(document).ready(function() {
     doSlide("#createMap", "#createLocation");
   });
 });
+
+
 
 //Handle member text fields add/remove
 $(function() {
@@ -289,12 +295,12 @@ $(document).ready(function() {
     var endHours = parseInt($("#timeEndHours").val());
     var endMinutes = parseInt($("#timeEndMinutes").val());
 
-    if (startHours < 12) {
-      if (!$("#StartAM").is(":selected")) {
+   if (startHours < 12) {
+      if ($("#StartPM").is(":checked")) {
         // we want hours 1-11 PM, so add 12
         startHours = startHours + 12;
       }
-    } else if ($("#StartAM").is(":selected")) {
+    } else if ($("#StartAM").is(":checked")) {
       // we want 12am, which is 0 hours
       startHours = 0;
     }
@@ -303,17 +309,18 @@ $(document).ready(function() {
     startDate.setMinutes(startMinutes);
 
     if (endHours < 12) {
-      if (!$("#endAM").is(":selected")) {
+      if ($("#EndPM").is(":checked")) {
         // we want hours 1-11 PM, so add 12
         endHours = endHours + 12;
       }
-    } else if ($("#EndAM").is(":selected")) {
+    } else if ($("#EndAM").is(":checked")) {
       // we want 12am, which is 0 hours
       endHours = 0;
     }
     
     endDate.setHours(endHours);
     endDate.setMinutes(endMinutes);
+    
     
     var meetLeader = $('#memberLead').val();
     var meetForm = $('#meetingType').val();
