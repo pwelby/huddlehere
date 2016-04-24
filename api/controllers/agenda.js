@@ -41,6 +41,7 @@ var AddAgenda = function(req,res,meeting){
             title: req.body.title,
             description: req.body.description,
             duration: req.body.duration,
+            purpose: req.body.purpose,
             comments: []
         });
         meeting.save(function(err,meeting){
@@ -118,6 +119,7 @@ if (!req.params.meetingid || !req.params.agendaid) {
         thisAgenda.title = req.body.title;
         thisAgenda.description = req.body.description;
         thisAgenda.duration = req.body.duration;
+        thisAgenda.purpose = req.body.purpose;
         meeting.save(function(err, meeting) {
             //check for error during save function
           if (err) {
