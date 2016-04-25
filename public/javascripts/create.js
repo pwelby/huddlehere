@@ -203,15 +203,14 @@ $(document).ready(function() {
     
     
     var meetLeader = $('#memberLead').val();
-    var meetForm = $('#meetingType').val();
     
     //meeting object
     var locCoords = parseFloat(createCurrentLocCoords[0]) + "," + parseFloat(createCurrentLocCoords[1]);
     var createMeeting = {
         meetingDate: startDate,
         endTime: endDate,
+        format: "Default",
         location: locCoords,
-        format: meetForm,
         leader: meetLeader,
         members: allMembers,
     };
