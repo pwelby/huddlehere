@@ -148,26 +148,23 @@ $(document).ready(function() {
   $('#slideMembers').on('click', function() {
    if($("#createMembForm").valid() === true)
     {
-      var allMembers = "";
-      var size = $('#memberText p').size();
-     
+      var allMembers = ""; 
       //get all members
-      for(var i = 1; i <= size; i++)
-      {
-
-        member = "memberName" + i;
-        if(document.getElementById(member).value == "")
+      $("#memberText").children().each(function(i, obj){
+        member = $(this).find("[id^=memberName]").val();
+        if(member == "")
         {
+          console.log("do nothing");
           //do nothing
         }
         else
         {
-          if(i == size)
-            allMembers += document.getElementById(member).value + ";undecided";
-          else
-            allMembers += document.getElementById(member).value + ";undecided,";
+           allMembers += member + ";undecided,";
         }
-      }
+      });     
+      
+      allMembers = allMembers.substring(0, allMembers.length - 1 );
+      
     var startDate = new Date($("#datepicker").val());
     var endDate = new Date(startDate);
     var startHours = parseInt($("#timeStartHours").val());
