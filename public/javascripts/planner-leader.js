@@ -12,25 +12,46 @@ var meetingID = meetingParse.substring(0, meetingParse.indexOf("/"));
  var numAgenda = objMeeting.agenda.length;
  var objAgenda = objMeeting.agenda;
  
+updateAgendaDB();
 
+function updateAgendaDB()
+{ 
+   for(var i = 0; i < numAgenda; i++)
+   {
+    var memberDiv = $('#agendaItems');
+    var agendaTitle = objAgenda[i].title;
+    var agendaDesc = objAgenda[i].description;
+    var agendaID = objAgenda[i]._id;
+    var agendaDuration = objAgenda[i].duration;
+    var agendaPurpose = objAgenda[i].purpose;
 
- for(var i = 0; i < numAgenda; i++)
- {
-   var memberDiv = $('#agendaItems');
-   var title = objAgenda[i].title;
-   var desc = objAgenda[i].description;
-   var ID = objAgenda[i]._id;
-    $('<span id = "ID-' + ID + '"><p><input type="text" id="agendaItem' + i + '"size="20" name="agendaItem' + i +'" value="' + title + '" placeholder="Agenda Item" /> <input type="button" id="rmvAgendaBtn" value="Remove"></input> <br> <div> <textarea value = "" style="resize: none;" cols="80%" rows="2" form="agendaDesc' + i + '" id="agendaDesc' + i + '" name="agendaDesc' + i + '" placeholder="Agenda Description">' + desc + '</textarea>&nbsp</label> <div> &nbsp; </div>').appendTo(memberDiv);
- }
- 
+    var title = '<span class="col-sm-6" id="ID-' + agendaID + '"><p><h4> Title: </h4><input type="text" id="agendaItem' + i + '"size="20" name="agendaItem' + i +'" value="' + agendaTitle + '" placeholder="Agenda Item" />';
+    var removebtn = ' <input type="button" id="rmvAgendaBtn" value="Remove"></input>';
+    var textbox = '<h4> Description: </h4> <textarea style="resize: none; width:100%" rows="2" form="agendaDesc' + i + '" id="agendaDesc' + i + '" name="agendaDesc' + i + '" placeholder="Agenda Description">' + agendaDesc + '</textarea>'
+    var duration = '<div class="col-sm-6 "text-center""> <h5> Duration(Mins): </h5><input  type="text" id="agendaDuration' + i + '"size="12" name="agendaDuration' + i +'" value="' + agendaDuration + '" placeholder="Duration (Mins)" /> </div>'
+    var purpose = '<div class="col-sm-6 "text-center""> <h5> Duration(Mins): </h5><select id="agendaPurpose' + i + '"><option value="Informational">Informational</option><option value="Decision">Decision</option><option value="Other">Other</option></select></div><hr class="col-sm-11"> ';
+
+    $(title + removebtn + textbox + duration + purpose).appendTo(memberDiv);
+    $('#agendaPurpose' + i).val(agendaPurpose);
+   }
+}
+
   //handles agenda items
    $(function() {
           var memberDiv = $('#agendaItems');
-          var i =  $('#agendaItems p').size() + 1;
           $('#addAgendaBtn').on('click', function() {
-                  $('<span id="ID-NONE"><p><input type="text" id="agendaItem' + i + '"size="20" name="agendaItem' + i +'" value="" placeholder="Agenda Item" /> <input type="button" id="rmvAgendaBtn" value="Remove"></input> <br> <div> <textarea style="resize: none;" cols="80%" rows="2" form="agendaDesc' + i + '" id="agendaDesc' + i + '" name="agendaDesc' + i + '" placeholder="Agenda Description" />&nbsp</label> <div> &nbsp; </div>').appendTo(memberDiv);
-                  i++;      
-                  return false;
+              var i =  $('#agendaItems p').size() + 1;
+              
+              var title = '<span id="ID-NONE" class="col-sm-6"><p><h4> Title: </h4> <input type="text" id="agendaItem' + i + '"size="20" name="agendaItem' + i +'" value="" placeholder="Agenda Item" />';
+              var removebtn = ' <input type="button" id="rmvAgendaBtn" value="Remove"></input>';
+              var textbox = '<h4> Description: </h4> <textarea  style="resize: none; width:100%"" cols="35%" rows="2" form="agendaDesc' + i + '" id="agendaDesc' + i + '" name="agendaDesc' + i + '" placeholder="Agenda Description" /> '
+              var duration = '<div class="col-sm-6"> <h5> Duration(Mins): </h5> <input type="text" id="agendaDuration' + i + '"size="12" name="agendaDuration' + i +'" value="" placeholder="Duration (Mins)" /> </div>'
+              var purpose = '<div class="col-sm-6"> <h5> Purpose: </h5> <select id="agendaPurpose"><option value="Informational">Informational</option><option value="Decision">Decision</option><option value="Other">Other</option></select> </div><hr class="col-sm-11">';
+              
+              $(title + removebtn + textbox + duration + purpose).appendTo(memberDiv);
+                    
+              i++;      
+              return false;
           });
           
           $('body').on('click', '#rmvAgendaBtn', function() { 
@@ -38,36 +59,30 @@ var meetingID = meetingParse.substring(0, meetingParse.indexOf("/"));
                   
                   agendaID = $(this).closest('span').attr('id');
                   agendaID = (agendaID.substring(agendaID.indexOf("-") + 1))
-                  console.log(agendaID);
-                  
-                  /*
-                  $.ajax({
-                      url: window.location.protocol + "//" + window.location.host + "/meetings/" + meetingID + "/agenda/" + agendaID,
-                      type: 'DELETE',
-                      success: function(result) {
-                          console.log("Done!")
-                      }
-                  });
-                  */
-                  
-                  //-------------------------
+                  console.log(agendaID);                 
+                if(agendaID == "NONE")
+                  {
+                    console.log("Can't remove this!");
+                  }
+                  else
+                  {
                     delRequest = new XMLHttpRequest();
-                    delRequest.open("DELETE", window.location.protocol + "//" + window.location.host + "/meetings/" + meetingID + "/agenda/" + agendaID);
+                    delRequest.open("DELETE", window.location.protocol + "//" + window.location.host + "/api/meetings/" + meetingID + "/agenda/" + agendaID);
                     delRequest.onreadystatechange = function() {
-                      if(delRequest.readyState === XMLHttpRequest.DONE && delRequest.status === 200) {
-                        window.alert("Status updated successfully!");
+                      if(delRequest.readyState === XMLHttpRequest.DONE && delRequest.status === 204) {
+
                         console.log("Request succeeded:");
                         console.log(delRequest.responseText);
-                      } else if (delRequest.status !== 200) {
+                      } else if (delRequest.status !== 204) {
                         console.log("Request failed: ");
                         console.log(delRequest.readyState, delRequest.status);
+                        console.log(delRequest.responseText);
                       }
                     };
                     delRequest.send();
-                  //-----------------------
+                  }
                   
                   $(this).closest('span').remove();
-                  i--;
                   return false;
           });
   });
@@ -76,28 +91,116 @@ var meetingID = meetingParse.substring(0, meetingParse.indexOf("/"));
       submitAgenda();
     });
     
-  function submitAgenda() {    
-    var size = $('#agendaItems p').size();
-    console.log(size);
-    for( var i = 1; i <= size; i++)
-    {
-      var agendaTitle = $("#agendaItem" + i).val();
-      var agendaDescription = $("#agendaDesc" + i).val();
-      var agendaID = $("#agendaItem" + i).closest('span').attr('id');  
+function submitAgenda() 
+
+{    
+    $("#agendaItems").children().each(function(i, obj){
+      console.log(i);
+      var agendaTitle = $(this).find("[id^=agendaItem]").val();
+      var agendaDescription = $(this).find("[id^=agendaDesc]").val();
+      var agendaID = $(this).attr("id").substring($(this).attr("id").indexOf("-") + 1)
+      var agendaDuration = $(this).find("[id^=agendaDuration]").val();
+      var agendaPurpose = $(this).find("[id^=agendaPurpose]").val();  
+      console.log(agendaTitle + ", " + agendaDescription + ", " + agendaID + ", " + agendaDuration + ", " + agendaPurpose);   
       
-      if(agendaID == "ID-NONE")
+      if(agendaTitle == "")
+        agendaTitle = "No Title";
+      if(agendaDescription == "")
+        agendaDescription = "No Description";
+      if(agendaDuration == "")
+        agendaDuration = "0";
+      if(isNaN(agendaDuration))
+         agendaDuration = "0"; 
+      if(agendaID == "NONE")
       {
-        var createAgenda = {
-          title: agendaTitle,
-          description: agendaDescription,
-          purpose: "none",  //"Informational," "Decision," or "Other"
-          duration: 60,
-          comments: ""
-        }
-        
-        $.post(window.location.protocol + "//" + window.location.host + "/api/meetings/" + meetingID + "/agenda", createAgenda, function(data, textStatus, jqXHR) {
-          var pagePath = "/m/" + data._id + "/l";      
-        }, "json");  
+          //alert("New data!");
+          var createAgenda = {
+            title: agendaTitle,
+            description: agendaDescription,
+            purpose: agendaPurpose,  //"Informational," "Decision," or "Other"
+            duration: agendaDuration
+          }
+          $.post(window.location.protocol + "//" + window.location.host + "/api/meetings/" + meetingID + "/agenda", createAgenda, function(){console.log(objMeeting.agenda); console.log("done");});         
       }
+      else
+        sendPut(agendaID, agendaTitle, agendaDescription, agendaDuration, agendaPurpose)        
+    });
+    window.location.reload();
+}
+ 
+function sendPut(agendaID, agendaTitle, agendaDescription, agendaDuration, agendaPurpose)
+{
+  var postData = Object.assign({}, objMeeting),
+  postAgendaData = postData.agenda, postAgendaDataN,
+  i, formPutRequest = new XMLHttpRequest(),
+  requestParams = "", prop;
+  var meetingId = meetingID;
+  var requestUrl = window.location.protocol + "//" + window.location.host;
+  var apiPath = "/api/meetings/" + meetingID + "/agenda/" + agendaID;
+   
+  console.log("postAgendaData: " + JSON.stringify(postAgendaData, null, 4));
+  console.log("postAgendaData.length: " + Object.keys(postAgendaData).length)
+  
+  function checkChange(i)
+  {
+      if(postAgendaData[i].title != agendaTitle)
+         return true;
+      if(postAgendaData[i].description != agendaDescription) 
+         return true;
+      if(postAgendaData[i].duration != agendaDuration) 
+         return true;
+      if(postAgendaData[i].purpose != agendaPurpose)
+         return true;      //"Informational," "Decision," or "Other"
+      else
+      {
+        return false
+      }
+  }
+  
+  for(var i = 0; i < Object.keys(postAgendaData).length; i++)
+  {
+    console.log("Agenda item " + i + " is " + postAgendaData[i]._id);
+    if(postAgendaData[i]._id === agendaID && checkChange(i))
+    {
+      console.log("Changing data on: " + agendaID);
+      postAgendaData[i].title = agendaTitle;
+      postAgendaData[i].description = agendaDescription; 
+      postAgendaData[i].duration = agendaDuration;
+      postAgendaData[i].purpose = agendaPurpose; //"Informational," "Decision," or "Other"
+      postAgendaDataN = postAgendaData[i]; //get this data item for URL encoding;            
     }
+    else if(postAgendaData[i]._id === agendaID && checkChange(i) == false)
+    {
+      console.log("We're done here! No change.")
+      return false;
+    }
+  }
+  
+  formPutRequest.open("PUT", requestUrl + apiPath);
+  formPutRequest.onreadystatechange = function() {
+    if(formPutRequest.readyState === XMLHttpRequest.DONE && formPutRequest.status === 200) {
+        //window.alert("Status updated successfully!");
+        console.log("Request succeeded:");
+        console.log(formPutRequest.responseText);
+      } else if (formPutRequest.status !== 200) {
+        console.log("Request failed: ");
+        console.log(formPutRequest.readyState, formPutRequest.status);
+      }
   };
+  
+  // serialize postAgendaData properties for URL encoding
+  for (prop in postAgendaDataN) {
+    if (postAgendaDataN.hasOwnProperty(prop)) {
+      requestParams += prop + "=" + postAgendaDataN[prop] + "&";
+      console.log(requestParams);
+    }
+  }
+
+  // remove the trailing "&"
+  requestParams = requestParams.substr(0, requestParams.length - 1);
+  console.log("requestParams: " + requestParams);    
+
+  formPutRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  formPutRequest.responseType = "text";
+  formPutRequest.send(requestParams);    
+}
