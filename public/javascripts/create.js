@@ -14,120 +14,6 @@ $( "#createMembers" ).last().addClass( "collapse" );
 $( "#createDetails" ).last().addClass( "collapse" );
 $( "#createURL" ).last().addClass( "collapse" );
 
-//validation on button presses
-$(document).ready(function() {
- 
-  //create location form validation
-  $("#createLocForm").validate({
-    rules: {
-      preSelTextBoxStreet: {
-        "required" : true
-      },
-      preSelTextBoxCity: {
-        "required" : true
-      },
-      preSelTextBoxState: {
-        "required" : true
-      },
-    },
-    messages: {
-        preSelTextBoxStreet: {
-            required : "Please enter a valid street address."
-        },
-        preSelTextBoxCity: {
-            required : "Please enter a valid city."
-        },
-        preSelTextBoxState: {
-            required : "Please enter a valid state."
-        }
-    },
-    errorElement: "div",
-    errorLabelContainer: "#locErrBox"
-  });
-  
-  //create member form validation
-  $("#createDetForm").validate({
-    rules: {
-      datepicker: {
-        "required" : true
-      },
-      timeStartHours: {
-        "required" : true
-      },
-      timeStartMinutes: {
-        "required" : true
-      },
-      timeEndHours: {
-        "required" : true
-      },
-      timeEndMinutes: {
-        "required" : true
-      },
-    },
-    messages: {
-        datepicker: {
-            required : "Please enter a valid date."
-        },
-        timeStartHours: {
-            required : "Please enter a valid start hour."
-        },
-        timeStartMinutes: {
-            required : "Please enter a valid start minute."
-        },
-        timeEndHours: {
-            required : "Please enter a valid end hour."
-        },
-        timeEndMinutes: {
-            required : "Please enter a valid end minute."
-        }
-    },
-    errorElement: "div",
-    errorLabelContainer: "#detErrBox"
-  });
-  
-  //create member form validation
-  $("#createMembForm").validate({
-    rules: {
-      memberLead: {
-        "required" : true
-      }
-    },
-    messages: {
-        memberLead: {
-            required : "The leader field is required!"
-        }
-    },
-    errorElement: "div",
-    errorLabelContainer: "#memErrBox"
-  });
-      
-  $('body').on('click', '#slideLocation', function() {
-    if($("#createLocForm").valid() === true)
-    {
-      doSlide("#createLocation", "#createMap", selLoc);
-    }
-  });
-
-  $('body').on('click', '#slideMap', function() {
-    doSlide("#createMap", "#createDetails");
-  });
-
-  $('body').on('click', '#slideDetails', function() {
-    if($("#createDetForm").valid() === true)
-    {
-      var date = new Date($("#datepicker").val());
-      var today = new Date();
-      if(date - today < 0)
-        console.log("You're in the past?");
-      else
-        doSlide("#createDetails", "#createMembers");
-    }
-  });
-  
-    $('body').on('click', '#slideBackLoc', function() {
-    doSlide("#createMap", "#createLocation");
-  });
-});
 
 //Handle member text fields add/remove
 $(function() {
@@ -289,12 +175,12 @@ $(document).ready(function() {
     var endHours = parseInt($("#timeEndHours").val());
     var endMinutes = parseInt($("#timeEndMinutes").val());
 
-    if (startHours < 12) {
-      if (!$("#StartAM").is(":selected")) {
+   if (startHours < 12) {
+      if ($("#StartPM").is(":checked")) {
         // we want hours 1-11 PM, so add 12
         startHours = startHours + 12;
       }
-    } else if ($("#StartAM").is(":selected")) {
+    } else if ($("#StartAM").is(":checked")) {
       // we want 12am, which is 0 hours
       startHours = 0;
     }
@@ -303,17 +189,18 @@ $(document).ready(function() {
     startDate.setMinutes(startMinutes);
 
     if (endHours < 12) {
-      if (!$("#endAM").is(":selected")) {
+      if ($("#EndPM").is(":checked")) {
         // we want hours 1-11 PM, so add 12
         endHours = endHours + 12;
       }
-    } else if ($("#EndAM").is(":selected")) {
+    } else if ($("#EndAM").is(":checked")) {
       // we want 12am, which is 0 hours
       endHours = 0;
     }
     
     endDate.setHours(endHours);
     endDate.setMinutes(endMinutes);
+    
     
     var meetLeader = $('#memberLead').val();
     var meetForm = $('#meetingType').val();

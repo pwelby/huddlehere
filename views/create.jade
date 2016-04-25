@@ -54,7 +54,7 @@ block content
         .panel.panel-primary.panel-details
           .panel-heading
             h2.panel-title DETAILS
-           .panel-body(style="height:400px")
+           .panel-body(style="height:400px;overflow:scroll")
               form(id = "createDetForm")
                 h4 Date/Time    
                 input(type='text', name='datepicker', id='datepicker')
@@ -63,18 +63,18 @@ block content
                 | &nbsp;:&nbsp;
                 input.time-field(type='text', id="timeStartMinutes", name="timeStartMinutes", maxlength="2", value="00")
                 h4
-                  input(type="radio" name="StartAM-PM" value="StartAM" id="StartAM" checked)
+                  input(type="radio" name="StartAMPM" value="StartAM" id="StartAM" checked)
                   | AM &nbsp;
-                  input(type="radio" name="StartAM-PM" value="StartPM")
+                  input(type="radio" name="StartAMPM" value="StartPM" id="StartPM")
                   | PM
                 h4 End
                 input.time-field(type='text', id="timeEndHours", name="timeEndHours", maxlength="2")
                 | &nbsp;:&nbsp;
                 input.time-field(type='text', id="timeEndMinutes", name="timeEndMinutes", maxlength="2", value="00")
                 h4
-                  input(type="radio" name="EndAM-PM" value="EndAM" id="EndAM" checked)
+                  input(type="radio" name="EndAMPM" value="EndAM" id="EndAM" checked)
                   | AM &nbsp;
-                  input(type="radio" name="EndAM-PM" value="EndPM")
+                  input(type="radio" name="EndAMPM" value="EndPM" id="EndPM")
                   | PM
               div(id = "detErrBox")
         div(style = "float: right;")
@@ -92,8 +92,8 @@ block content
                 input(type = "button" id="addMemberBtn" value = "Add")        
               div(id="memberText")
                 p()
-              h4
-                input(type="text" id="memberName1" size="20" name="memberName1" value="" placeholder="Member Name")
+              input(type="text" id="memberName1" size="20" name="memberName1" value="" placeholder="Member Name")
+              div(id = "memErrBox")
         div(style = "float: right;")
           input(type='button', id="slideMembers", value="Done!")
       div(id = "createURL")
@@ -109,4 +109,5 @@ block content
   .col-md-4
   script(src='/javascripts/panelSlide.js')
   script(src='/javascripts/create.js')                
+  script(src='/javascripts/createValidate.js') 
   script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=initPreSelMap')
