@@ -88,6 +88,7 @@ function updateAgendaDB()
   });
 
   $('body').on('click', '#submitAgenda', function() {
+      console.log("hit");
       submitAgenda();
     });
     
