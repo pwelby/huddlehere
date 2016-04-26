@@ -23,12 +23,15 @@ block content
             h2.panel-title LOCATION
           .panel-body(style="height:400px")
             form(id = "createLocForm")
-              h4
-                input(type="radio" name="loc" class = "locRadio" value="nearby" checked="")
-                | My Current Location	
-              h4
-                input(type="radio" name="loc" class = "locRadio" value="preSel")
-                | Pre-Selected Location
+              //- THESE RADIO BUTTONS ARE WORKING --V see here for DOM structure guides:
+                http://fezvrasta.github.io/bootstrap-material-design/#radio-button
+              div.radio
+                label
+                  input(type="radio" name="loc" class = "locRadio" value="nearby" checked="")
+                  | My Current Location	
+                label
+                  input(type="radio" name="loc" class = "locRadio" value="preSel")
+                  | Pre-Selected Location
               h4
                 input(type="text" placeholder = "Street" id = "preSelTextBoxStreet" name = "preSelTextBoxStreet" disabled = "")
               h4
