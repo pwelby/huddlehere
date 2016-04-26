@@ -36,7 +36,7 @@ var fetchComments = function(){
     for(i = 0; i < numAgenda; i++ ){
        numComments = objMeeting.agenda[i].comments.length;
        for(j = 0; j < numComments; j++){
-           header = "<div id = " + "'" + objMeeting.agenda[i].comments[j]._id + "' style = 'border: 1px solid #e1e1e1; margin: 15px; border-radius: 10px;' > <i class='fa fa-times' aria-hidden='true' style = 'margin: 5px; ' onclick = deleteComment(this);></i>";
+           header = "<div id = " + "'" + objMeeting.agenda[i].comments[j]._id + "/" + objMeeting.agenda[i]._id + "' style = 'border: 1px solid #e1e1e1; margin: 15px; border-radius: 10px;' > <i class='fa fa-times' aria-hidden='true' style = 'margin: 5px; ' onclick = deleteComment(this);></i>";
            body = " <h4 style =' margin: 15px; '> " + objMeeting.agenda[i].comments[j].commenter + "</h4>"  + "<p style = 'margin:15px;'>" + generateDate(objMeeting.agenda[i].comments[j].created) + "</p>" + "\n  <div><p style = ' margin: 15px; '> " + objMeeting.agenda[i].comments[j].commentText + "</p> </div>";
            end = "</div>";
            $("#panel_body" + objMeeting.agenda[i]._id).append(header + body + end);
@@ -58,9 +58,12 @@ var generateDate = function(date){
 }
 //deletes corresponding comment when X icon is clicked
 var deleteComment = function(obj){
-   //agenda id is hosted in the id in the second parent of the comment
-   agendaID = $(obj).parent().parent().attr("id").substring(10);
-   commentID = $(obj).parent().attr("id");
+   //agendaid and commentid are stored inside attribute id like so commentid/agendaid
+   var ids = $(obj).parent().attr("id").split("/");
+   agendaID = ids[1];
+   commentID = ids[0];
+   console.log(agendaID);
+   console.log(commentID);
    
    delRequest = new XMLHttpRequest();
    delRequest.open("DELETE", window.location.protocol + "//" + window.location.host + "/api/meetings/" + meetingID + "/agenda/" + agendaID + "/comments/" + commentID);
