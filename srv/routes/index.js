@@ -10,18 +10,31 @@ var ctrlMeetings = require('../controllers/meetings');
 
 // Tool page routes 
 router.get('/', function(req, res, next) {
-  res.render('create', { title: 'HuddleHere' });
+  res.render('home', { title: 'HuddleHere' });
 });
-router.get('/planner-leader', function(req, res, next) {
-  res.render('planner-leader', { title: 'HuddleHere' });
+
+router.get('/', function(req, res, next) {
+  res.render('home', { title: 'Home' });
+});
+
+router.get('/about', function(req, res, next) {
+  res.render('about', { title: 'About' });
+});
+
+router.get('/create', function(req, res, next) {
+  res.render('create', { title: 'Create Meeting' });
+});
+
+/**router.get('/planner-leader', function(req, res, next) {
+    res.render('planner-leader', { title: 'Leader' });
 });
 router.get('/planner-member', function(req, res, next) {
-  res.render('planner-member', { title: 'HuddleHere' });
+    res.render('planner-member', { title: 'Member' });
 });
 
 router.get('/coach', function(req, res, next) {
-  res.render('coach', {title: 'HuddleHere'});
-});
+  res.render('coach', {title: 'Coach'});
+});*/
 
 // Meeting planner routes
 router.get('/m/:meetingid/l', ctrlMeetings.getLeaderPage);

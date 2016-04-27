@@ -1,3 +1,9 @@
+//  File: /views/layout.jade
+//  Author: Evan O'Leary
+//
+//  Serves as a base for all pages. Will display a header and a footer and replace block content specific to each page.
+//  Follows a boilerplate implementation found here: https://github.com/sahat/hackathon-starter/tree/master/views
+
 doctype html
 html
   head
@@ -5,19 +11,26 @@ html
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js')
-    title= title
+    script(src='/javascripts/jquery-ui.min.js')
+    script(src='/bootstrap/js/bootstrap.min.js')
+    //- script(src='/javascripts/timeutil.js')
+    //- script(src='/javascripts/availRand.js')
+    title #{title} - HuddleHere
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/jquery-ui.min.css')
     link(rel='stylesheet', href='/stylesheets/jquery-ui.structure.min.css')
     link(rel='stylesheet', href='/stylesheets/jquery-ui.theme.min.css')
     link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
-    script(src='/javascripts/jquery-ui.min.js')
-    script(src='/bootstrap/js/bootstrap.min.js')
-    //- script(src='/javascripts/timeutil.js')
-    //- script(src='/javascripts/availRand.js')
+    
   body
-    //-
-      div#navArea
+    include partials/header
+    
+    .container 
+      block content
+      
+    include partials/footer
+    
+    //-  div#navArea
         h3 ALPHA NAV:
         a(href='/') Meeting Creator
         a(href='/planner-leader') Planner (Leader View)
@@ -39,5 +52,4 @@ html
         else if (minutes < 10) minutes = "0" + minutes;   
         return "" + hours + ":" + minutes + " " + ampm;
         };
-      block content
     
