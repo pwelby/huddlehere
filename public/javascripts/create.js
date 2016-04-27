@@ -35,7 +35,7 @@ $(function() {
         });
 });
 
-/*function initPreSelMap() {
+function initPreSelMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
     center: { lat: 42.3600825, lng: -71.05888010000001 }
@@ -44,7 +44,9 @@ $(function() {
   var street = document.getElementById('preSelTextBoxStreet').value;
   var city = document.getElementById('preSelTextBoxCity').value;
   var state = document.getElementById('preSelTextBoxState').value;
-  
+  console.log(street);
+   console.log(city);
+   console.log(state);
   var geocoder = new google.maps.Geocoder();
 
   if(street != ""&& city != "" && state != "")
@@ -70,7 +72,7 @@ $(function() {
       }
     });
   }
-}*/
+}
 function initNearbyMap() {
 
   var myOptions = {

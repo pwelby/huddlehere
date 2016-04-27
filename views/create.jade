@@ -5,46 +5,91 @@ extends layout
 
 block content 
   head
+  style
+   include ../public/stylesheets/datePicker.css
   #banner.page-header
     .row
       .col-lg-6
         h1 HuddleHere
           br
           small Make Group Projects Easy!
-  hr
-  div(class = "col-md-6 col-md-offset-3")
-   div(id = "visible" style = "overflow-x:auto; padding:10px;")
+  hr(style="background-color: #BDBDBD;")
+  div(class = "col-md-6 col-md-offset-3") 
+   div(style = "padding: 10px;" id = "createLocation")
     div(class = "well bs-component")
-     form(class = "form-horizontal" id = "createLocForm")
+      form(class = "form-horizontal" id = "createLocForm")
+       fieldset
+        legend Where's the meeting?
+        div(class = "form-group")
+         label( class = "col-md-2 control-label") Select
+         div(class = "col-md-10")
+          div(class = "radio radio-primary")
+           label
+            input(type="radio" name="loc" class = "locRadio" value="nearby" checked="")
+            | My Current Location
+          div(class = "radio radio-primary")
+           label
+            input(type="radio" name="loc" class = "locRadio" value="preSel")
+            | Pre-Selected Location
+        div(class = "form-group")
+         label(for = "preSelTextBoxStreet" class = "col-md-2 control-label") Street
+         div(class = "col-md-10")
+          input(class = "form-control" type="text" placeholder = "Street" id = "preSelTextBoxStreet" name = "preSelTextBoxStreet" disabled = "")
+          span(class="help-block")
+        div(class = "form-group")
+         label(for = "preSelTextBoxCity" class = "col-md-2 control-label") City
+         div(class = "col-md-10")
+          input(class = "form-control" type="text" placeholder = "City" id = "preSelTextBoxCity" name =  "preSelTextBoxCity" disabled = "")
+          span(class="help-block")
+        div(class = "form-group")
+         label(for = "preSelTextBoxState" class = "col-md-2 control-label") State
+         div(class = "col-md-10")
+          input(class = "form-control" type="text" placeholder = "State" id = "preSelTextBoxState" name = "preSelTextBoxState" disabled = "")
+          span(class="help-block")
+    a(id = "slideLocation" class = "btn btn-raised btn-primary" style = "float:right;" ) Next
+   div(style = "padding: 10px;" id = "createMap" class = "collapse")
+    div(class = "well bs-component")
+     fieldset
+      legend Does this look correct?
+      div(id = "map")
+    a(id = "slideBackLoc" class = "btn btn-raised btn-default" style = "float:left;" ) Back
+    a(id = "slideMap" class = "btn btn-raised btn-primary" style = "float:right;" ) Next
+   div(style = "padding: 10px;" id = "createDetails" class = "collapse")
+    div(class = "well bs-component")
+     form(class = "form-horizontal" id = "createDetForm")
       fieldset
-       legend Location
+       legend It's all about the details
        div(class = "form-group")
-        label( class = "col-md-2 control-label") Select
+        label(for = "datepicker" class = "col-md-2 control-label") Date
         div(class = "col-md-10")
-         div(class = "radio radio-primary")
-          label
-           input(type="radio" name="loc" class = "locRadio" value="nearby" checked="")
-           | My Current Location
-         div(class = "radio radio-primary")
-          label
-           input(type="radio" name="loc" class = "locRadio" value="preSel")
-           | Pre-Selected Location
-       div(class = "form-group")
-        label(for = "preSelTextBoxStreet" class = "col-md-2 control-label") Street
-        div(class = "col-md-10")
-         input(class = "form-control" type="text" placeholder = "Street" id = "preSelTextBoxStreet" name = "preSelTextBoxStreet" disabled = "")
+         input(class = "form-control" type="text" placeholder = "Pick a date" id = "datepicker" name = "datepicker")
          span(class="help-block")
        div(class = "form-group")
-        label(for = "preSelTextBoxCity" class = "col-md-2 control-label") City
-        div(class = "col-md-10")
-         input(class = "form-control" type="text" placeholder = "City" id = "preSelTextBoxCity" name =  "preSelTextBoxCity" disabled = "")
-         span(class="help-block")
+        label(for = "" class = "col-md-2 control-label") Start
+        div(class = "col-md-10")  
+         div(class = "col-md-2")
+          input(class = "form-control" type="text" placeholder = "Hour" name maxlength = "2" style = "text-align: center;")
+         div(class = "col-xs-1")
+          h2(style = "margin-top: 3px; margin-bottom: 15px;") :
+         div(class = "col-md-2")
+          input(class = "form-control" type="text" placeholder = "Min" name maxlength = "2" style = "text-align: center;")
+         div(class = "col-md-2")
+          select(class = "form-control")
+           option AM
+           option PM
        div(class = "form-group")
-        label(for = "preSelTextBoxState" class = "col-md-2 control-label") State
-        div(class = "col-md-10")
-         input(class = "form-control" type="text" placeholder = "State" id = "preSelTextBoxState" name = "preSelTextBoxState" disabled = "")
-         span(class="help-block")
-   a(id = "slideLocation" class = "btn btn-raised btn-primary" style = "float:right;" ) Next
+        label(for = "" class = "col-md-2 control-label") End
+        div(class = "col-md-10")  
+         div(class = "col-md-2")
+          input(class = "form-control" type="text" placeholder = "Hour" name maxlength = "2" style = "text-align: center;")
+         div(class = "col-xs-1")
+          h2(style = "margin-top: 3px; margin-bottom: 15px;") :
+         div(class = "col-md-2")
+          input(class = "form-control" type="text" placeholder = "Min" name maxlength = "2" style = "text-align: center;")
+         div(class = "col-md-2")
+          select(class = "form-control")
+           option AM
+           option PM   
   script(src='/javascripts/panelSlide.js')
   script(src='/javascripts/create.js')                
   script(src='/javascripts/createValidate.js') 

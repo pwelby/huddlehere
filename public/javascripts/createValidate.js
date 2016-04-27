@@ -149,6 +149,7 @@ $(document).ready(function() {
   });
   
     $('body').on('click', '#slideBackLoc', function() {
+        console.log("HIT");
     doSlide("#createMap", "#createLocation");
   });
 });
