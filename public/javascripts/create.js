@@ -44,9 +44,7 @@ function initPreSelMap() {
   var street = document.getElementById('preSelTextBoxStreet').value;
   var city = document.getElementById('preSelTextBoxCity').value;
   var state = document.getElementById('preSelTextBoxState').value;
-  console.log(street);
-   console.log(city);
-   console.log(state);
+  
   var geocoder = new google.maps.Geocoder();
 
   if(street != ""&& city != "" && state != "")
@@ -139,10 +137,10 @@ $(document).ready(function() {
     }
   });
 
-  
-
   $(function() {
-    $("#datepicker").datepicker({onClose: function() { this.focus(); }});
+      console.log("hit")
+    $('#datepicker').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+
   });
   $(function() {
   

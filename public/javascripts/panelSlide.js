@@ -1,3 +1,4 @@
+
 /**
  * File: /public/javascripts/panelSlide.js
  * Author: Patrick Quaratiello
@@ -19,12 +20,8 @@ doSlide = function(currentPanel, nextPanel, selectedLocation) {
       options = { to: { width: 200, height: 60 } };
     }
     // run the effect
-    $(currentPanel).hide("slide", { direction: "right"}, 1000, function () {$(nextPanel).toggle( selectedEffect, options, 500); if(nextPanel === "#createMap"){getMap(nextPanel, selectedLocation);}});
+    $(currentPanel).hide("slide", { direction: "right"}, 1000, function () {$(nextPanel).toggle( selectedEffect, options, 500); if(nextPanel == "#createMap"){getMap(nextPanel, selectedLocation);}});
      };
-     console.log("Current Panel: " + currentPanel);
-     console.log("Next Panel: " + nextPanel);
-     console.log("Selected Location: " + selectedLocation);
-     
      
     // set effect from select menu value
     runSlide();
@@ -32,7 +29,7 @@ doSlide = function(currentPanel, nextPanel, selectedLocation) {
   
   function getMap(nextPanel, selectedLocation)
   {
-    if(nextPanel === "#createMap")
+    if(nextPanel == "#createMap")
     {
       if(selectedLocation)
         initPreSelMap();
@@ -40,4 +37,3 @@ doSlide = function(currentPanel, nextPanel, selectedLocation) {
         initNearbyMap();
     }
   }
-  

@@ -6,7 +6,6 @@ extends layout
 block content 
   head
   style
-   include ../public/stylesheets/datePicker.css
   #banner.page-header
     .row
       .col-lg-6
@@ -48,10 +47,11 @@ block content
           span(class="help-block")
     a(id = "slideLocation" class = "btn btn-raised btn-primary" style = "float:right;" ) Next
    div(style = "padding: 10px;" id = "createMap" class = "collapse")
-    div(class = "well bs-component")
-     fieldset
+    div(class = "well bs-component" style = "height:100%;")
+     fieldset(style = "")
       legend Does this look correct?
-      div(id = "map")
+      div(style = "col-md-12")
+      div(id = "map" style = "height:480px;")
     a(id = "slideBackLoc" class = "btn btn-raised btn-default" style = "float:left;" ) Back
     a(id = "slideMap" class = "btn btn-raised btn-primary" style = "float:right;" ) Next
    div(style = "padding: 10px;" id = "createDetails" class = "collapse")
@@ -89,8 +89,24 @@ block content
          div(class = "col-md-2")
           select(class = "form-control")
            option AM
-           option PM   
+           option PM 
+    a(id = "slideDetails" class = "btn btn-raised btn-primary" style = "float:right;" ) Next
+   div(style = "padding: 10px;" id = "createMembers" class = "collapse")
+    div(class = "well bs-component")  
+     form(class = "form-horizontal" id = "createMembForm")
+      fieldset
+       legend Let's get some member info
+       div(class = "form-group")
+        label(for = "memberLead" class = "col-md-2 control-label") Leader
+        div(class = "col-md-10")
+         input(class = "form-control" type="text" id="memberLead" name="memberLead" placeholder="Leader Name")
+       div(id = "memberText")
+        div(class = "form-group" )
+         label(for = "member" class = "col-md-2 control-label") Member #1
+         div(class = "col-md-10")
+          input(class = "form-control" type="text" id="member" name="memberLead" placeholder="Member Name")
+       
   script(src='/javascripts/panelSlide.js')
   script(src='/javascripts/create.js')                
   script(src='/javascripts/createValidate.js') 
- // script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=initPreSelMap')
+  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=initPreSelMap')
