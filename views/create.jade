@@ -13,103 +13,35 @@ block content
         h1 HuddleHere
           br
           small Make Group Projects Easy!
-  .row
-    .col-md-4
-    .col-md-4
-      div(id="createLocation")
-        .h4 Where's the meeting?
-        .panel.panel-primary.panel-location
-          .panel-heading
-            h2.panel-title LOCATION
-          .panel-body(style="height:400px")
-            form(id = "createLocForm")
-              //- THESE RADIO BUTTONS ARE WORKING --V see here for DOM structure guides:
-                http://fezvrasta.github.io/bootstrap-material-design/#radio-button
-              div.radio
-                label
-                  input(type="radio" name="loc" class = "locRadio" value="nearby" checked="")
-                  | My Current Location	
-                label
-                  input(type="radio" name="loc" class = "locRadio" value="preSel")
-                  | Pre-Selected Location
-              h4
-                input(type="text" placeholder = "Street" id = "preSelTextBoxStreet" name = "preSelTextBoxStreet" disabled = "")
-              h4
-                input(type="text" placeholder = "City" id = "preSelTextBoxCity" name =  "preSelTextBoxCity" disabled = "")
-              h4
-                input(type="text" placeholder = "State" id = "preSelTextBoxState" name = "preSelTextBoxState" disabled = "")
-            div(id = "locErrBox")
-        div(style = "float: right;")
-          input(type='button', id="slideLocation", value="Next")
-      div(id = "createMap")
-        .h4 Does this look correct?
-        .panel.panel-primary.panel-map
-          .panel-heading
-            h2.panel-title LOCATION
-          .panel-body(style="height:400px")
-            div(id = "map" style = "width:100%;height:90%;")
-        div(style = "float: right;")
-          input(type='button', id="slideMap", value="Next")
-        div(style = "float: left")
-          input(type='button', id="slideBackLoc", value="Back")
-      div(id="createDetails")
-        .h4 It's all about the details...
-        .panel.panel-primary.panel-details
-          .panel-heading
-            h2.panel-title DETAILS
-           .panel-body(style="height:400px;overflow:scroll")
-              form(id = "createDetForm")
-                h4 Date/Time    
-                input(type='text', name='datepicker', id='datepicker')
-                h4 Start
-                input.time-field(type='text', id="timeStartHours", name="timeStartHours", maxlength="2")
-                | &nbsp;:&nbsp;
-                input.time-field(type='text', id="timeStartMinutes", name="timeStartMinutes", maxlength="2", value="00")
-                h4
-                  input(type="radio" name="StartAMPM" value="StartAM" id="StartAM" checked)
-                  | AM &nbsp;
-                  input(type="radio" name="StartAMPM" value="StartPM" id="StartPM")
-                  | PM
-                h4 End
-                input.time-field(type='text', id="timeEndHours", name="timeEndHours", maxlength="2")
-                | &nbsp;:&nbsp;
-                input.time-field(type='text', id="timeEndMinutes", name="timeEndMinutes", maxlength="2", value="00")
-                h4
-                  input(type="radio" name="EndAMPM" value="EndAM" id="EndAM" checked)
-                  | AM &nbsp;
-                  input(type="radio" name="EndAMPM" value="EndPM" id="EndPM")
-                  | PM
-              div(id = "detErrBox")
-        div(style = "float: right;")
-          input(type='button', id="slideDetails", value="Next")
-      div(id = "createMembers")
-        .h4 Lets get some member info...
-        .panel.panel-primary.panel-members
-          .panel-heading
-            h2.panel-title TEAM MEMBERS
-          .panel-body(style="height:400px;overflow:scroll")
-            form(id = "createMembForm")
-              h4 Leader 
-              input(type="text" id="memberLead" size="20" name="memberLead" value="" placeholder="Leader Name")
-              h4 Members       
-                input(type = "button" id="addMemberBtn" value = "Add")        
-              div(id="memberText")
-                p
-                  input(type="text" id="memberName1" size="20" name="memberName1" value="" placeholder="Member Name")
-              div(id = "memErrBox")
-        div(style = "float: right;")
-          input(type='button', id="slideMembers", value="Done!")
-      div(id = "createURL")
-        .h4 Here you go!
-        .panel.panel-primary.panel-URL
-          .panel-heading YOUR URL
-          .panel-body(style="height:400px;word-break:break-all;overflow:scroll")
-            .h4 Meeting Planner: Leader
-            .div
-              a(id = "uniqURL")
-        div(style = "float: right;")
-          input(type='button', id="slideURL", value="Next")
-  .col-md-4
+  hr
+  div(class = "col-md-6 col-md-offset-3")
+   div(class = "well bs-component")
+    form(class = "form-horizontal")
+     fieldset
+      legend Location
+      div(class = "form-group")
+       label( class = "col-md-2 control-label") Select
+       div(class = "col-md-10")
+        div(class = "radio radio-primary")
+         label
+          input(type="radio" name="loc" class = "locRadio" value="nearby" checked="")
+          | My Current Location
+        div(class = "radio radio-primary")
+         label
+          input(type="radio" name="loc" class = "locRadio" value="preSel")
+          | Pre-Selected Location
+      div(class = "form-group")
+       label(for = "preSelTextBoxStreet" class = "col-md-2 control-label") Street
+       div(class = "col-md-10")
+        input(class = "form-control" type="text" placeholder = "Street" id = "preSelTextBoxStreet" name = "preSelTextBoxStreet" disabled = "")
+      div(class = "form-group")
+       label(for = "preSelTextBoxCity" class = "col-md-2 control-label") City
+       div(class = "col-md-10")
+        input(class = "form-control" type="text" placeholder = "City" id = "preSelTextBoxCity" name =  "preSelTextBoxCity" disabled = "")
+      div(class = "form-group")
+       label(for = "preSelTextBoxState" class = "col-md-2 control-label") State
+       div(class = "col-md-10")
+        input(class = "form-control" type="text" placeholder = "State" id = "preSelTextBoxState" name = "preSelTextBoxState" disabled = "")
   script(src='/javascripts/panelSlide.js')
   script(src='/javascripts/create.js')                
   script(src='/javascripts/createValidate.js') 
