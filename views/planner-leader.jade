@@ -12,6 +12,17 @@ block content
     .col-xs-12.col-sm-4
       .panel.panel-primary
         .panel-heading
+          h2.panel-title Links:
+        .panel-body(style="word-break:break-all;")
+          h2.panel-title Members link:
+            .div
+              a(id = "memURL")
+          br
+          h2.panel-title Coach link:
+            .div
+              a(id = "coachURL")
+      .panel.panel-primary
+        .panel-heading
           h2.panel-title Team Status:
         .panel-body
            each member in meeting.members
@@ -53,19 +64,31 @@ block content
         .panel-heading
           h2.panel-title Objectives:
         .panel-body
+          div
           .row
-            div(class="col-md-offset-4 col-md-4 text-center")
-              h3 Agenda Items  
+            .col-md-4 
+              div(id= "agendaErrBox")
+            div(class=" col-md-4 text-center")
+              h3 Agenda Items 
+            .col-md-4
           .row
-            div(class="col-md-offset-4 col-md-4 text-center")
-              div(style = "float: left;")
-                input(type = "button" id="addAgendaBtn" value = "Create") 
-              div(style = "float: right;")
-                input(type="button", id="submitAgenda", value="Submit")
+            .col-md-3
+            div(class="col-md-6 text-center")
+              .col-md-4
+                div(style = "float: left;")
+                  input(type = "button" id="addAgendaBtn" value = "Create") 
+              div(class="col-md-4 text-center")
+                div(id = "agendaSuccessBox")
+              .col-md-4
+                div(style = "float: right;")
+                  input(type="button", id="submitAgenda", value="Submit")
+            .col-md-3
           .row
             hr
           .div
-            div(id="agendaItems")    
+            div(id="agendaItems") 
+          div(id="agendaItems")    
+  script(src='/javascripts/leaderValidate.js') 
   script(src='/javascripts/planner-leader.js') 
   script(src='/javascripts/geo.js')
   script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=geoInitialize')

@@ -40,7 +40,6 @@ $(document).ready(function() {
     onkeyup: false,
     onclick: false,
     onfocusout: false,
-    onclick: false,
     rules: {
       datepicker: {
         "required" : true,
@@ -55,7 +54,8 @@ $(document).ready(function() {
                           else
                               return true;
                       }
-        }
+        },
+        "futureTime" : true
       },
       timeStartMinutes: {
         "required" : true,
@@ -82,7 +82,8 @@ $(document).ready(function() {
         },
         timeStartHours: {
             "required" : "Please enter a valid start hour.",
-            "validTime" : "Please make sure the start hours is before the end time."
+            "validTime" : "Please make sure the start hours is before the end time.",
+            "futureTime" : "Please make sure the start time is in the future."
         },
         timeStartMinutes: {
             "required" : "Please enter a valid start minute.",
@@ -147,6 +148,38 @@ jQuery.validator.addMethod("inFuture", function(value, element) {
     return this.optional(element) || (date - today >= 0);
 });
 
+jQuery.validator.addMethod("futureTime", function(value, element) {
+  
+    var startDate = new Date($("#datepicker").val());
+    var startHours = parseInt($("#timeStartHours").val());
+    var startMinutes = parseInt($("#timeStartMinutes").val());
+    var timeNow = new Date().getTime();
+    
+    if (startHours < 12) {
+      if ($("#StartPM").is(":checked")) {
+        // we want hours 1-11 PM, so add 12
+        startHours = startHours + 12;
+      }
+    } else if ($("#StartAM").is(":checked")) {
+      // we want 12am, which is 0 hours
+      startHours = 0;
+    }
+    
+    startDate.setHours(startHours);
+    startDate.setMinutes(startMinutes);
+    
+    startTime = startDate.getTime();
+        
+    console.log("now: " + timeNow);
+    console.log("start time: " + startTime);
+    console.log("starttime - now: " + (startTime - timeNow));
+    
+    startTime = startDate.getTime();
+
+    return this.optional(element) || (startTime - timeNow > 0);
+  
+  });
+  
 jQuery.validator.addMethod("validTime", function(value, element) {
     
     var startDate = new Date($("#datepicker").val());
