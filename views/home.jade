@@ -1,0 +1,15 @@
+//  File: /views/home.jade
+//  Author: Evan O'Leary
+//
+//  Block content of the home page is defined here.
+//  Follows a boilerplate implementation found here: https://github.com/ALT-F1/bootstrap3-jade-node-express grunt/blob/master/app/views/bootstrap3-templates/jumbotron-narrow.jade
+
+extends layout
+
+block content
+  .jumbotron.text-center
+    h1 HuddleHere
+    p.lead
+      | HuddleHere is a meeting organization app that makes group meetings easier by assisting the group’s leader and members in finding and setting up a meeting’s location and objectives. 
+    p
+      a.btn.btn-lg.btn-success(href='/create', role='button') Create Meeting
