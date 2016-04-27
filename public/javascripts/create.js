@@ -35,7 +35,7 @@ $(function() {
         });
 });
 
-function initPreSelMap() {
+/*function initPreSelMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
     center: { lat: 42.3600825, lng: -71.05888010000001 }
@@ -70,7 +70,7 @@ function initPreSelMap() {
       }
     });
   }
-}
+}*/
 function initNearbyMap() {
 
   var myOptions = {
@@ -137,7 +137,7 @@ $(document).ready(function() {
     }
   });
 
-  $('.dropdown-toggle').dropdown();
+  
 
   $(function() {
     $("#datepicker").datepicker({onClose: function() { this.focus(); }});

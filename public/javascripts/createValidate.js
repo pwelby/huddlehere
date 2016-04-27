@@ -31,8 +31,20 @@ $(document).ready(function() {
             "required" : "Please enter a valid state."
         }
     },
-    errorElement: "div",
-    errorLabelContainer: "#locErrBox"
+    errorPlacement: function(error, element) {
+            console.log("hit");
+            helpObj = $(element).next();
+            $(helpObj).html(error.text());
+            parentObj = $(element).parent().parent();
+            $(parentObj).addClass("has-error");
+    },
+    success: function(label,element) {
+        helpObj = $(element).next();
+        $(helpObj).html("");
+        parentObj = $(element).parent().parent();
+            $(parentObj).removeClass("has-error");
+    }
+        
   });
   
   //create member form validation

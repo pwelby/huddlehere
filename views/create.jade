@@ -5,8 +5,6 @@ extends layout
 
 block content 
   head
-     style
-      include ../public/stylesheets/create.css
   #banner.page-header
     .row
       .col-lg-6
@@ -15,35 +13,39 @@ block content
           small Make Group Projects Easy!
   hr
   div(class = "col-md-6 col-md-offset-3")
-   div(class = "well bs-component")
-    form(class = "form-horizontal")
-     fieldset
-      legend Location
-      div(class = "form-group")
-       label( class = "col-md-2 control-label") Select
-       div(class = "col-md-10")
-        div(class = "radio radio-primary")
-         label
-          input(type="radio" name="loc" class = "locRadio" value="nearby" checked="")
-          | My Current Location
-        div(class = "radio radio-primary")
-         label
-          input(type="radio" name="loc" class = "locRadio" value="preSel")
-          | Pre-Selected Location
-      div(class = "form-group")
-       label(for = "preSelTextBoxStreet" class = "col-md-2 control-label") Street
-       div(class = "col-md-10")
-        input(class = "form-control" type="text" placeholder = "Street" id = "preSelTextBoxStreet" name = "preSelTextBoxStreet" disabled = "")
-      div(class = "form-group")
-       label(for = "preSelTextBoxCity" class = "col-md-2 control-label") City
-       div(class = "col-md-10")
-        input(class = "form-control" type="text" placeholder = "City" id = "preSelTextBoxCity" name =  "preSelTextBoxCity" disabled = "")
-      div(class = "form-group")
-       label(for = "preSelTextBoxState" class = "col-md-2 control-label") State
-       div(class = "col-md-10")
-        input(class = "form-control" type="text" placeholder = "State" id = "preSelTextBoxState" name = "preSelTextBoxState" disabled = "")
-   a(class = "btn btn-raised btn-primary" style = "float:right;" ) Next
+   div(id = "visible" style = "overflow-x:auto; padding:10px;")
+    div(class = "well bs-component")
+     form(class = "form-horizontal" id = "createLocForm")
+      fieldset
+       legend Location
+       div(class = "form-group")
+        label( class = "col-md-2 control-label") Select
+        div(class = "col-md-10")
+         div(class = "radio radio-primary")
+          label
+           input(type="radio" name="loc" class = "locRadio" value="nearby" checked="")
+           | My Current Location
+         div(class = "radio radio-primary")
+          label
+           input(type="radio" name="loc" class = "locRadio" value="preSel")
+           | Pre-Selected Location
+       div(class = "form-group")
+        label(for = "preSelTextBoxStreet" class = "col-md-2 control-label") Street
+        div(class = "col-md-10")
+         input(class = "form-control" type="text" placeholder = "Street" id = "preSelTextBoxStreet" name = "preSelTextBoxStreet" disabled = "")
+         span(class="help-block")
+       div(class = "form-group")
+        label(for = "preSelTextBoxCity" class = "col-md-2 control-label") City
+        div(class = "col-md-10")
+         input(class = "form-control" type="text" placeholder = "City" id = "preSelTextBoxCity" name =  "preSelTextBoxCity" disabled = "")
+         span(class="help-block")
+       div(class = "form-group")
+        label(for = "preSelTextBoxState" class = "col-md-2 control-label") State
+        div(class = "col-md-10")
+         input(class = "form-control" type="text" placeholder = "State" id = "preSelTextBoxState" name = "preSelTextBoxState" disabled = "")
+         span(class="help-block")
+   a(id = "slideLocation" class = "btn btn-raised btn-primary" style = "float:right;" ) Next
   script(src='/javascripts/panelSlide.js')
   script(src='/javascripts/create.js')                
   script(src='/javascripts/createValidate.js') 
-  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=initPreSelMap')
+ // script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=initPreSelMap')
