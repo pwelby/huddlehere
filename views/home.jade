@@ -1,15 +1,96 @@
 //  File: /views/home.jade
 //  Author: Evan O'Leary
 //
-//  Block content of the home page is defined here.
+//  Block content of the home page and an about section is defined here.
 //  Follows a boilerplate implementation found here: https://github.com/ALT-F1/bootstrap3-jade-node-express grunt/blob/master/app/views/bootstrap3-templates/jumbotron-narrow.jade
 
 extends layout
 
 block content
+ .div(class='go_to_about', id='Home')
   .jumbotron.text-center
     h1 HuddleHere
     p.lead
       | HuddleHere is a meeting organization app that makes group meetings easier by assisting the group’s leader and members in finding and setting up a meeting’s location and objectives. 
     p
       a.btn.btn-lg.btn-success(href='/create', role='button') Create Meeting
+    br 
+  .col-sm-12
+    div(class="text-center")
+      a(href="#About", class="smoothScroll", role="button")
+        i.fa.fa-chevron-down
+  
+  br 
+  br
+  br
+  br
+  br
+  br
+  br
+  br
+  br
+  br
+  
+  .div(class='top_of_home', id='About')
+    .container
+      .row
+        .col-lg-1
+        .col-lg-5
+          img.img-circle(src="/images/dev_images/Alex_Li.jpg", alt="Alex Li", style="width: 140px; height: 140px;")
+          h3 ALEX LI
+          h4 Web Developer
+          p
+            | Alex ...
+          p
+          a(href="https://github.com/aali2537", target="_blank")
+            i.fa.fa-github 
+            |&nbsp GitHub
+        .col-lg-5 
+          img.img-circle(src="/images/dev_images/Evan_OLeary.jpg", alt="Evan O'Leary", style="width: 140px; height: 140px;")
+          h3 EVAN O'LEARY
+          h4 Web Developer
+          p 
+            | Evan has finally discovered the power of GitHub.
+          p
+          a(href="https://github.com/olearyevan", target="_blank")
+            i.fa.fa-github 
+            |&nbsp GitHub 
+        .col-lg-1
+      .row  
+        .col-lg-1
+        .col-lg-5
+          img.img-circle(src="/images/dev_images/Patrick_Quaratiello.jpg", alt="Patrick Quaratiello", style="width: 140px; height: 140px;")
+          h3 PATRICK QUARATIELLO 
+          h4 Web Developer
+          p 
+            | Patrick ...
+          p
+          a(href="https://github.com/patqrtll", target="_blank") 
+            i.fa.fa-github 
+            |&nbsp GitHub 
+        .col-lg-5
+          img.img-circle(src="/images/dev_images/Peter_Welby.jpg", alt="Peter Welby", style="width: 140px; height: 140px;")
+          h3 PETER WELBY
+          h4 Web Developer
+          p 
+            | Peter has an irrational fear of merge conflicts.
+          p
+          a(href="https://github.com/pwelby", target="_blank")
+            i.fa.fa-github 
+            |&nbsp GitHub 
+        .col-lg-1
+    br
+    br
+    .col-sm-12
+    div(class="text-center")
+      a(href="#Home", class="smoothScroll", role="button")
+        i.fa.fa-chevron-up
+      //a.(href="#top", class="smoothScroll", role="button")
+        //i.material.expandless(href="#Home", class="smoothScroll", role="button") Arrow Up
+      
+      script(src='/javascripts/smooth_scroll.js')
+      
+            
+      script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"  
+
+      
