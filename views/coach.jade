@@ -12,13 +12,35 @@ block content
         .panel-heading
           h2.panel-title Agenda
         .panel-body
-          each item in meeting.agenda
-            .panel.panel-default
-              .panel-heading
-                h2.panel-title= item.title
-                | Duration: #{item.duration} minutes
-              .panel-body
-                em= item.description
+          if meeting.agenda.length > 0
+            each item in meeting.agenda
+              .panel.panel-default
+                .panel-heading
+                  h2.panel-title= item.title
+                  | Duration: #{item.duration} minutes
+                .panel-body
+                  em= item.description
+          else
+            p
+              em No agenda items yet.
+      .panel.panel-primary
+        .panel-heading
+          h2.panel-title Member Comments
+        .panel-body
+          if meeting.agenda.length > 0
+            each item in meeting.agenda
+              if item.comments.length > 0
+                each comment in item.comments
+                  .panel.panel-default
+                    .panel-heading
+                      h2.panel-title #{comment.commenter} on #{item.title}
+                    .panel-body
+                      p= comment.commentText
+                  
+          else 
+            p
+              em No agenda items yet.
+                
     .col-md-4
       .panel.panel-primary
         .panel-heading
