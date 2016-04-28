@@ -139,7 +139,7 @@ $(document).ready(function() {
 
   $(function() {
       console.log("hit")
-    $('#datepicker').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+    $('#datepicker').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
 
   });
   $(function() {
