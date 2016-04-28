@@ -27,7 +27,10 @@ $( "#coachURL" ).html( coachURL );
 updateAgendaDB();
 
 $( "#agendaItems" ).change(function() {
-  $("#agendaSuccessBox").html(" ");
+   $("#agendaItems").children().each(function(i, obj){
+     console.log("Stuff and things")
+      $(this).valid();
+   });
 });
 function updateAgendaDB()
 { 
@@ -40,69 +43,104 @@ function updateAgendaDB()
     var agendaDuration = objAgenda[i].duration;
     var agendaPurpose = objAgenda[i].purpose;
 
-    var title = '<form class="col-sm-6 validateForm" id="ID-' + agendaID + '"name = "agendaForm' + i + '"><p><h4> Title: </h4><input type="text" id="agendaItem' + i + '"size="20" name="agendaItem' + i +'" value="' + agendaTitle + '" placeholder="Agenda Item" />';
-    var removebtn = ' <input type="button" id="rmvAgendaBtn" value="Remove"></input>';
-    var textbox = '<h4> Description: </h4> <textarea style="resize: none; width:100%" rows="2" id="agendaDesc' + i + '" name="agendaDesc' + i + '" placeholder="Agenda Description">' + agendaDesc + '</textarea>'
-    var duration = '<div class="col-sm-6 "text-center""> <h5> Duration(Mins): </h5><input  type="text" id="agendaDuration' + i + '"size="12" name="agendaDuration' + i + '" value="' + agendaDuration + '" placeholder="Duration (Mins)" /> </div>'
-    var purpose = '<div class="col-sm-6 "text-center""> <h5> Duration(Mins): </h5><select id="agendaPurpose' + i + '"><option value="Informational">Informational</option><option value="Decision">Decision</option><option value="Other">Other</option></select></div><hr class="col-sm-11"> ';
+    var title = '<form class="col-md-6" id="ID-' + agendaID + '" name = "agendaForm' + i + '"><div class="col-md-8"> <div class = "form-group"><label for = "agendaItem' + i + '"class = "control-label"> Title <input class = "form-control" type="text" id="agendaItem' + i + ' name="agendaItem' + i +'" value="' + agendaTitle + '" placeholder="Agenda Item" /></label></div></div>';
+    var removebtn = '<div class = "col-md-4"> <a class="btn btn-raised btn-xs" type="button" id="rmvAgendaBtn"' + i + '> Remove </a> </div></div>';
+    var textbox =  '<div class="col-md-12"> <div class = "form-group"><label for = "agendaDesc' + i + '"class = "control-label"> Description </label> <textarea class="form-control" id="agendaDesc' + i + '" name="agendaDesc' + i + '" placeholder="Agenda Description" value = "test"> ' + agendaDesc + '</textarea> </div> </div>';
+    var duration = '<div class="col-md-6"><div class = "form-group"> <label for = "agendaDuration' + i + '"class = "control-label"> Duration </label> <input class = "form-control" type="text" placeholder = "Duration" id = "agendaDuration' + i + '" value="' + agendaDuration + '"name = "agendaDuration' + i + '"></div></div>';
+    var purpose = '<div class="col-md-6"><div class="form-group"> <label class = "control-label" for="agendaPurpose"' + i + '>Purpose</label>  <select id="agendaPurpose' + i + '" class="form-control">   <option value="Informational">Informational</option>   <option value="Decision">Decision</option>   <option value="Other">Other</option>   </select>  </div></div>';
 
-    $(title + removebtn + textbox + duration + purpose).appendTo(memberDiv);
+    $(title + removebtn + textbox + duration + purpose + "<hr> </form> ").appendTo(memberDiv);
+   
     $('#agendaPurpose' + i).val(agendaPurpose);
   
-    $("[name=agendaForm" + i + "]").validate(); 
-    
-    $('#agendaItem' + i).rules("add", { 
-
-    });
-        
-    $('#agendaDesc' + i).rules("add", {  
-
-    }); 
-    
-    $('#agendaDuration' + i).rules("add", { 
-        "number" : true,
-        "durationSum" : true,
-        messages: {
-          "number" : "",
-          "durationSum" : ""
+    var aItem =  '#agendaItem' + i;
+     
+    $("[name=agendaForm" + i + "]").validate(
+    {
+      rules:
+      {
+        aItem: 
+        {
+          
         }
-    });  
-  }
+      },
+      messages:
+      {
+
+      },
+      errorPlacement: function(error, element) {
+        console.log("hit");
+        helpObj = $(element).next();
+        $(helpObj).html(error.text());
+        parentObj = $(element).parent();
+        $(parentObj).addClass("has-error");
+      },
+      success: function(label,element) {
+          helpObj = $(element).next();
+          $(helpObj).html("");
+          parentObj = $(element).parent();
+              $(parentObj).removeClass("has-error");
+      }
+    });
+ }
 }
+
+
+
+
+
+
+
+
 
   //handles agenda items
    $(function() {
           var agendaItems = $('#agendaItems');
           $('#addAgendaBtn').on('click', function() {
-              var i =  $('#agendaItems p').size() + 1;
+          var i =  $('#agendaItems form').size() + 1;
               
-              var title = '<form id="ID-NONE" class="col-sm-6" name = "agendaForm' + i + '"><p><h4> Title: </h4> <input type="text" id="agendaItem' + i + '"size="20" name="agendaItem' + i +'" value="" placeholder="Agenda Item" />';
-              var removebtn = ' <input type="button" id="rmvAgendaBtn" value="Remove"></input>';
-              var textbox = '<h4> Description: </h4> <textarea style="resize: none; width:100%"" cols="35%" rows="2" id="agendaDesc' + i + '" name="agendaDesc' + i + '" placeholder="Agenda Description" /> '
-              var duration = '<div class="col-sm-6"> <h5> Duration(Mins): </h5><input style="width:100%" type="text" size="100%" id="agendaDuration' + i + '"name="agendaDuration' + i + '"value="" placeholder="Duration (Mins)"/></div>'
-              var purpose = '<div class="col-sm-6"> <h5> Purpose: </h5> <select id="agendaPurpose"><option value="Informational">Informational</option><option value="Decision">Decision</option><option value="Other">Other</option></select> </div><hr class="col-sm-11">';
-                
-              $(title + removebtn + textbox + duration + purpose).appendTo(agendaItems);
-                  
-              $("[name=agendaForm" + i + "]").validate(); 
-    
-                $('#agendaItem' + i).rules("add", { 
+              var title = '<form class="col-md-6" id="ID-NONE" name = "agendaForm' + i + '"><div class="col-md-8"> <div class = "form-group"><label for = "agendaItem' + i + '"class = "control-label"> Title <input class = "form-control" type="text" id="agendaItem' + i + ' name="agendaItem' + i +'" value="" placeholder="Agenda Item" /></label><span class="help-block"></div></div>';
+              var removebtn = '<div class = "col-md-4"> <a class="btn btn-raised btn-xs" type="button" id="rmvAgendaBtn"' + i + '> Remove </a> </div></div>';
 
-                });
+              var textbox =  '<div class="col-md-12"> <div class = "form-group"><label for = "agendaDesc' + i + '"class = "control-label"> Description </label> <textarea class="form-control" id="agendaDesc' + i + '" name="agendaDesc' + i + '" placeholder="Agenda Description" /> </div> </div>';
+              var duration = '<div class="col-md-6"><div class = "form-group"> <label for = "agendaDuration' + i + '"class = "control-label"> Duration </label> <input number = "number" durationSum = "durationSum" class = "form-control" type="text" placeholder = "Duration" id = "agendaDuration' + i + '" name = "agendaDuration' + i + '"><span class = "help-block"></div></div>';
+
+              var purpose = '<div class="col-md-6"><div class="form-group"> <label class = "control-label" for="agendaPurpose">Purpose</label>  <select id="agendaPurpose" class="form-control">   <option value="Informational">Informational</option>   <option value="Decision">Decision</option>   <option value="Other">Other</option>   </select>  </div></div><hr class="col-sm-11">';
+                
+              $(title + removebtn + textbox + duration + purpose).appendTo(agendaItems);             
+                
+             console.log("#agendaForm" + i)
+             
+            var aItem =  '#agendaItem' + i;
+            $('#agendaPurpose' + i).val(agendaPurpose);
+           
+              $("[name=agendaForm" + i + "]").validate(
+              {
+                rules:
+                {
+                  aItem: 
+                  {
                     
-                $('#agendaDesc' + i).rules("add", {  
+                  }
+                },
+                messages:
+                {
 
-                }); 
-                
-                $('#agendaDuration' + i).rules("add", { 
-                    "number" : true,
-                    "durationSum" : true,
-                    messages: {
-                      "number" : "",
-                      "durationSum" : ""
-                    }
-                });  
-                
+                },
+                errorPlacement: function(error, element) {
+                  console.log("hit");
+                  helpObj = $(element).next();
+                  $(helpObj).html(error.text());
+                  parentObj = $(element).parent();
+                  $(parentObj).addClass("has-error");
+                },
+                success: function(label,element) {
+                    helpObj = $(element).next();
+                    $(helpObj).html("");
+                    parentObj = $(element).parent();
+                        $(parentObj).removeClass("has-error");
+                }
+              });
               i++;   
               return false;
           });
@@ -147,10 +185,11 @@ function updateAgendaDB()
 function submitAgenda() 
 
 {    
+    var formValid = false;
     
-    var ERROR = false;
     $("#agendaItems").children().each(function(i, obj){
-      console.log(i);
+      formValid = $(this).valid();
+      console.log("Form invalid: " + formValid);
       var agendaTitle = $(this).find("[id^=agendaItem]").val();
       var agendaDescription = $(this).find("[id^=agendaDesc]").val();
       var agendaID = $(this).attr("id").substring($(this).attr("id").indexOf("-") + 1)
@@ -158,16 +197,12 @@ function submitAgenda()
       var agendaPurpose = $(this).find("[id^=agendaPurpose]").val();  
       console.log(agendaTitle + ", " + agendaDescription + ", " + agendaID + ", " + agendaDuration + ", " + agendaPurpose);   
        var agendaDurationID = $(this).find("[id^=agendaDuration]").attr("ID");
-      
-      if($( "#" + agendaDurationID ).hasClass( "error" ))
+        
+      if((formValid) == false)
       {
-        $("#agendaSuccessBox").css('color', 'red');
-        $("#agendaSuccessBox").html("Overtime!");
-        ERROR = true;
+        return false
       }
       
-      if(ERROR)
-        return false
       if(agendaTitle == "")
         agendaTitle = "No Title";
       if(agendaDescription == "")
@@ -185,13 +220,15 @@ function submitAgenda()
             purpose: agendaPurpose,  //"Informational," "Decision," or "Other"
             duration: agendaDuration
           }
-          $.post(window.location.protocol + "//" + window.location.host + "/api/meetings/" + meetingID + "/agenda", createAgenda, function(){  $("#agendaSuccessBox").css('color', 'green');  $("#agendaSuccessBox").html("Success!");});         
+          $.post(window.location.protocol + "//" + window.location.host + "/api/meetings/" + meetingID + "/agenda", createAgenda, function(){  /*$("#agendaSuccessBox").css('color', 'green');  $("#agendaSuccessBox").html("Success!");*/});         
       }
       else
         sendPut(agendaID, agendaTitle, agendaDescription, agendaDuration, agendaPurpose)        
     });
     
-    if(ERROR)
+    console.log("Form invalid 3: " + formValid);
+    
+    if(formValid == false)
       return false
     else
       window.location.reload();
@@ -240,8 +277,8 @@ function sendPut(agendaID, agendaTitle, agendaDescription, agendaDuration, agend
     }
     else if(postAgendaData[i]._id === agendaID && checkChange(i) == false)
     {
-      $("#agendaSuccessBox").css('color', 'green');
-      $("#agendaSuccessBox").html("Success!");  
+      //$("#agendaSuccessBox").css('color', 'green');
+      //$("#agendaSuccessBox").html("Success!");  
       return false;
     }
   }
@@ -273,6 +310,6 @@ function sendPut(agendaID, agendaTitle, agendaDescription, agendaDuration, agend
   formPutRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   formPutRequest.responseType = "text";
   formPutRequest.send(requestParams);   
-  $("#agendaSuccessBox").css('color', 'green');
-  $("#agendaSuccessBox").html("Success!");   
+  // $("#agendaSuccessBox").css('color', 'green');
+  //$("#agendaSuccessBox").html("Success!");   
 }
