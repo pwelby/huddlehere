@@ -9,8 +9,12 @@ var router = express.Router();
 var ctrlMeetings = require('../controllers/meetings');
 
 // Tool page routes 
+
 router.get('/', function(req, res, next) {
-  res.render('create', { title: 'HuddleHere' });
+  res.render('home', { title: 'HuddleHere' });
+});
+router.get('/create', function(req, res, next) {
+  res.render('create', { title: 'Create Meeting' });
 });
 router.get('/planner-leader', function(req, res, next) {
   res.render('planner-leader', { title: 'HuddleHere' });
