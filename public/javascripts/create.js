@@ -139,7 +139,7 @@ $(document).ready(function() {
 
   $(function() {
       console.log("hit")
-    $('#datepicker').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+    $('#datepicker').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY', time: false, minDate : new Date() });
 
   });
   $(function() {
