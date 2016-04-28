@@ -277,3 +277,15 @@ function sendPut(agendaID, agendaTitle, agendaDescription, agendaDuration, agend
   $("#agendaSuccessBox").css('color', 'green');
   $("#agendaSuccessBox").html("Success!");   
 }
+
+$(document).ready(function(){
+  $("#memURL").popover({
+    trigger: 'hover',
+    html: 'true'
+  });
+  
+  $("#coachURL").popover({
+    trigger: 'hover',
+    html: 'true'
+  });
+});

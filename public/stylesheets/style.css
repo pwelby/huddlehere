@@ -43,6 +43,14 @@ input.time-field {
   color: #cc0000
 }
 
+.popover-title {
+  color: #ebebeb;
+}
+
+.popover-content {
+  color: #ebebeb;
+}
+
 .review {padding-bottom: 5px;}
 .panel-body.review-container {padding-top: 0;}
 .review-header {margin-bottom: 10px;}

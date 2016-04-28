@@ -14,11 +14,11 @@ block content
         .panel-body(style="word-break:break-all;")
           h2.panel-title Members link:
             .div
-              a(id = "memURL")
+              a(id = "memURL" data-toggle="popover" trigger="hover" data-placement="top" data-title="Member Link" data-content="Share this link with your team members to keep them in the loop!")
           br
           h2.panel-title Coach link:
             .div
-              a(id = "coachURL")
+              a(id = "coachURL" data-toggle="popover" trigger="hover" data-placement="bottom" data-title="Member Link" data-content="This is the link to the Meeting Schedule Coach, for when you're ready to meet.")
       .panel.panel-primary
         .panel-heading
           h2.panel-title Team Status:
