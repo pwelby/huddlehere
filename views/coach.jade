@@ -5,24 +5,42 @@ block content
   script(type='text/javascript').
     var objMeeting = !{JSON.stringify(meeting)}
   .row.page-header: .col-lg-12
-    h1 HuddleHere
-      br
-      small Meeting Schedule Coach
+    h1 Meeting Schedule Coach
   .row
     .col-md-8
       .panel.panel-primary
         .panel-heading
-          h2.panel-title Format: #{meeting.format}
+          h2.panel-title Agenda
         .panel-body
-          p Facilitator: #{meeting.leader}
-          p Recorder: #{meeting.members[0]}
-          h2 Agenda
-          each item in meeting.agenda
-            .panel.panel-default
-              .panel-heading
-                h2.panel-title= item.title
-              .panel-body
-                em= item.description
+          if meeting.agenda.length > 0
+            each item in meeting.agenda
+              .panel.panel-default
+                .panel-heading
+                  h2.panel-title= item.title
+                  | Duration: #{item.duration} minutes
+                .panel-body
+                  em= item.description
+          else
+            p
+              em No agenda items yet.
+      .panel.panel-primary
+        .panel-heading
+          h2.panel-title Member Comments
+        .panel-body
+          if meeting.agenda.length > 0
+            each item in meeting.agenda
+              if item.comments.length > 0
+                each comment in item.comments
+                  .panel.panel-default
+                    .panel-heading
+                      h2.panel-title #{comment.commenter} on #{item.title}
+                    .panel-body
+                      p= comment.commentText
+                  
+          else 
+            p
+              em No agenda items yet.
+                
     .col-md-4
       .panel.panel-primary
         .panel-heading
@@ -42,17 +60,23 @@ block content
           strong Scheduled Start:
           br 
           p#meetingStart
-          br
           strong Scheduled End:
           br
           p#meetingEnd
-          br
           strong Time Remaining:
           br
           p#countDownClock
+          br
+          strong Current Item:
+          br
+          p#currentItem
+          strong Time Left for This Item:
+          br
+          p#agendaCountDownClock
   script(src='/javascripts/geo.js')
   script(src='/javascripts/coachTimes.js')
   script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=geoInitialize')
   script(src='/javascripts/coachCountdown.js')
+  script(src='/javascripts/coachAgendaCountdown.js')
 
   
