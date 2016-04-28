@@ -32,7 +32,10 @@
    
   $("#agendaItems input[id^='agendaDuration']").each(function()
     {
-       sumDurations += parseInt($(this).val());
+      if(isNaN(parseInt($(this).val())))
+        sumDurations += 0;
+      else
+        sumDurations += parseInt($(this).val());
     });
     timeLeft = (meetDuration - sumDurations);
     currentDuration = sumDurations;
@@ -43,7 +46,7 @@
       sumDurations = 0;
     }
     
-  return this.optional(element) || valid;
-});//, function(params, element) {
-  //return 'Total time is ' + currentDuration + ' minutes of' + meetDuration + " minutes."
-//});
+   return this.optional(element) || valid;
+  }, function(params, element) {
+      return currentDuration + '/' + meetDuration + " minutes."
+});

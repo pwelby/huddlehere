@@ -76,18 +76,18 @@ block content
             div(class="col-md-6 text-center")
               .col-md-4
                 div(style = "float: left;")
-                  input(type = "button" id="addAgendaBtn" value = "Create") 
+                  a(class = "btn btn-primary btn-raised" type = "button" id="addAgendaBtn") Create
               div(class="col-md-4 text-center")
                 div(id = "agendaSuccessBox")
               .col-md-4
                 div(style = "float: right;")
-                  input(type="button", id="submitAgenda", value="Submit")
+                  a(class = "btn btn-primary btn-raised" type="button", id="submitAgenda") Submit
             .col-md-3
           .row
             hr
           .div
-            div(id="agendaItems") 
-          div(id="agendaItems")    
+            div(id="agendaItems")  
+            
   script(src='/javascripts/leaderValidate.js') 
   script(src='/javascripts/planner-leader.js') 
   script(src='/javascripts/geo.js')
