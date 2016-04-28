@@ -47,42 +47,41 @@ function updateAgendaDB()
     var removebtn = '<div class = "col-md-4"> <a class="btn btn-raised btn-xs" type="button" id="rmvAgendaBtn"' + i + '> Remove </a> </div></div>';
     var textbox =  '<div class="col-md-12"> <div class = "form-group"><label for = "agendaDesc' + i + '"class = "control-label"> Description </label> <textarea class="form-control" id="agendaDesc' + i + '" name="agendaDesc' + i + '" placeholder="Agenda Description" value = "test"> ' + agendaDesc + '</textarea> </div> </div>';
     var duration = '<div class="col-md-6"><div class = "form-group"> <label for = "agendaDuration' + i + '"class = "control-label"> Duration </label> <input class = "form-control" type="text" placeholder = "Duration" id = "agendaDuration' + i + '" value="' + agendaDuration + '"name = "agendaDuration' + i + '"></div></div>';
-    var purpose = '<div class="col-md-6"><div class="form-group"> <label class = "control-label" for="agendaPurpose">Purpose</label>  <select id="agendaPurpose" class="form-control">   <option value="Informational">Informational</option>   <option value="Decision">Decision</option>   <option value="Other">Other</option>   </select>  </div></div>';
+    var purpose = '<div class="col-md-6"><div class="form-group"> <label class = "control-label" for="agendaPurpose"' + i + '>Purpose</label>  <select id="agendaPurpose' + i + '" class="form-control">   <option value="Informational">Informational</option>   <option value="Decision">Decision</option>   <option value="Other">Other</option>   </select>  </div></div>';
 
     $(title + removebtn + textbox + duration + purpose + "<hr> </form> ").appendTo(memberDiv);
    
     $('#agendaPurpose' + i).val(agendaPurpose);
   
-     var aItem =  '#agendaItem' + i;
-     $('#agendaPurpose' + i).val(agendaPurpose);
+    var aItem =  '#agendaItem' + i;
      
-        $("[name=agendaForm" + i + "]").validate(
+    $("[name=agendaForm" + i + "]").validate(
+    {
+      rules:
+      {
+        aItem: 
         {
-          rules:
-          {
-            aItem: 
-            {
-              
-            }
-          },
-          messages:
-          {
+          
+        }
+      },
+      messages:
+      {
 
-          },
-          errorPlacement: function(error, element) {
-            console.log("hit");
-            helpObj = $(element).next();
-            $(helpObj).html(error.text());
-            parentObj = $(element).parent();
-            $(parentObj).addClass("has-error");
-          },
-          success: function(label,element) {
-              helpObj = $(element).next();
-              $(helpObj).html("");
-              parentObj = $(element).parent();
-                  $(parentObj).removeClass("has-error");
-          }
-        });
+      },
+      errorPlacement: function(error, element) {
+        console.log("hit");
+        helpObj = $(element).next();
+        $(helpObj).html(error.text());
+        parentObj = $(element).parent();
+        $(parentObj).addClass("has-error");
+      },
+      success: function(label,element) {
+          helpObj = $(element).next();
+          $(helpObj).html("");
+          parentObj = $(element).parent();
+              $(parentObj).removeClass("has-error");
+      }
+    });
  }
 }
 
