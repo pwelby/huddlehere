@@ -179,11 +179,11 @@ jQuery.validator.addMethod("futureTime", function(value, element) {
     var timeNow = new Date().getTime();
     
     if (startHours < 12) {
-      if ($("#StartPM").is(":checked")) {
+      if ($("#Startam").val() === "PM") {
         // we want hours 1-11 PM, so add 12
         startHours = startHours + 12;
       }
-    } else if ($("#StartAM").is(":checked")) {
+    } else if ($("#Startam").val() === "AM") {
       // we want 12am, which is 0 hours
       startHours = 0;
     }
