@@ -19,7 +19,11 @@ var getAgendaTimestamps = function() {
     startTimestamp = Date.parse(objMeeting.meetingDate);
   
   for (i = 0; i < objMeeting.agenda.length; i++) {
-    agendaTimestamps.push(new Date(startTimestamp + (objMeeting.agenda[i].duration * 1000 * 60)));
+    if (i < 1) {
+      agendaTimestamps.push(new Date(startTimestamp + (objMeeting.agenda[i].duration * 1000 * 60)));
+    } else {
+      agendaTimestamps.push(new Date(agendaTimestamps[i - 1] + (objMeeting.agenda[i].duration * 1000 * 60)));
+    }
   }
   
   return agendaTimestamps;
