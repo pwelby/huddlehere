@@ -7,7 +7,7 @@
 extends layout
 
 block content
- .div(class='go_to_about', id='top')
+ .div(class='go_to_about', id='Home')
   .jumbotron.text-center
     h1 HuddleHere
     p.lead
@@ -17,7 +17,7 @@ block content
     br 
   .col-sm-12
     div(class="text-center")
-      a(href="#bottom", class="smoothScroll", role="button")
+      a(href="#About", class="smoothScroll", role="button")
         i.fa.fa-chevron-down
   
   br 
@@ -31,7 +31,7 @@ block content
   br
   br
   
-  .div(class='top_of_home', id='bottom')
+  .div(class='top_of_home', id='About')
     .container
       .row
         .col-lg-1
@@ -40,7 +40,7 @@ block content
           h3 ALEX LI
           h4 Web Developer
           p
-            | This is a placeholder paragraph.  blah blah bl bl bl bl bl bl bl bl bl bl bl bl bl nl kndgfklngdflkfdgkln fklgdnkglklfdgnkl
+            | Alex ...
           p
           a(href="https://github.com/aali2537", target="_blank")
             i.fa.fa-github 
@@ -50,12 +50,13 @@ block content
           h3 EVAN O'LEARY
           h4 Web Developer
           p 
-            | This is a placeholder paragraph. blah blah bl bl bl bl bl bl bl bl bl bl bl bl bl bl nl sdlngknlkfdgklngfdklngdflknl kndgfklngdflkfdgkln fklgdnkglklfdgnkl
+            | Evan has finally discovered the power of GitHub.
           p
           a(href="https://github.com/olearyevan", target="_blank")
             i.fa.fa-github 
             |&nbsp GitHub 
         .col-lg-1
+      br
       .row  
         .col-lg-1
         .col-lg-5
@@ -63,7 +64,7 @@ block content
           h3 PATRICK QUARATIELLO 
           h4 Web Developer
           p 
-            | This is a placeholder paragraph.
+            | Patrick ...
           p
           a(href="https://github.com/patqrtll", target="_blank") 
             i.fa.fa-github 
@@ -73,7 +74,7 @@ block content
           h3 PETER WELBY
           h4 Web Developer
           p 
-            | This is a placeholder paragraph. blsah blsah blsah blsah blsah blsah blsah blsah blsah blsah blsah blsah blsah blsah blsah blsah blsah
+            | Peter has an irrational fear of merge conflicts.
           p
           a(href="https://github.com/pwelby", target="_blank")
             i.fa.fa-github 
@@ -83,9 +84,9 @@ block content
     br
     .col-sm-12
     div(class="text-center")
-      a(href="#top", class="smoothScroll", role="button")
+      a(href="#Home", class="smoothScroll", role="button")
         i.fa.fa-chevron-up
-      //a.(href="#top", class="smoothScroll", role="button")
+      //a.(href="#Home", class="smoothScroll", role="button")
         //i.material.expandless(href="#top", class="smoothScroll", role="button") Arrow Up
       
       script(src='/javascripts/smooth_scroll.js')
