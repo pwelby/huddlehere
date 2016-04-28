@@ -68,44 +68,61 @@ block content
         label(for = "" class = "col-md-2 control-label") Start
         div(class = "col-md-10")  
          div(class = "col-md-2")
-          input(class = "form-control" type="text" placeholder = "Hour" name maxlength = "2" style = "text-align: center;")
+          input(id = "timeStartHours" class = "form-control" type="text" placeholder = "Hour" name = "timeStartHours" maxlength = "2" style = "text-align: center;")
+          div(class="help-block")
          div(class = "col-xs-1")
           h2(style = "margin-top: 3px; margin-bottom: 15px;") :
          div(class = "col-md-2")
-          input(class = "form-control" type="text" placeholder = "Min" name maxlength = "2" style = "text-align: center;")
+          input(id = "timeStartMinutes" class = "form-control" type="text" placeholder = "Min" name = "timeStartMinutes" maxlength = "2" style = "text-align: center;")
+          div(class="help-block")
          div(class = "col-md-2")
           select(class = "form-control")
            option AM
            option PM
+         div(class = "col-md-3")  
        div(class = "form-group")
         label(for = "" class = "col-md-2 control-label") End
         div(class = "col-md-10")  
          div(class = "col-md-2")
-          input(class = "form-control" type="text" placeholder = "Hour" name maxlength = "2" style = "text-align: center;")
+          input(id = "timeEndHours" class = "form-control" type="text" placeholder = "Hour" name = "timeEndHours" maxlength = "2" style = "text-align: center;")
          div(class = "col-xs-1")
           h2(style = "margin-top: 3px; margin-bottom: 15px;") :
          div(class = "col-md-2")
-          input(class = "form-control" type="text" placeholder = "Min" name maxlength = "2" style = "text-align: center;")
+          input(id = "timeEndMinutes" class = "form-control" type="text" placeholder = "Min" name = "timeEndHours" maxlength = "2" style = "text-align: center;")
          div(class = "col-md-2")
           select(class = "form-control")
            option AM
            option PM 
+       div(id = "detErrBox" style = "height : 100px; text-align: center;")    
     a(id = "slideDetails" class = "btn btn-raised btn-primary" style = "float:right;" ) Next
    div(style = "padding: 10px;" id = "createMembers" class = "collapse")
     div(class = "well bs-component")  
      form(class = "form-horizontal" id = "createMembForm")
-      fieldset
-       legend Let's get some member info
+      fieldset(id = "memberWrapper")
+       legend Let's get some team info
        div(class = "form-group")
         label(for = "memberLead" class = "col-md-2 control-label") Leader
         div(class = "col-md-10")
          input(class = "form-control" type="text" id="memberLead" name="memberLead" placeholder="Leader Name")
-       div(id = "memberText")
-        div(class = "form-group" )
-         label(for = "member" class = "col-md-2 control-label") Member #1
+         span(class="help-block")
+       div(class = "row")
+       div(class = "row" style = "margin-top: 10px;")
+        div(class = "col-md-2")
+         h4 Members
+        div(class = "col-md-2")
+         a(id = "addMemberBtn" class="btn btn-raised btn-xs" style = "margin-top: 6px; margin-left: 5px;") Add Members
+       div(class = "form-group" )
+         label(for = "memberName1" class = "col-md-2 control-label") Member #1
          div(class = "col-md-10")
-          input(class = "form-control" type="text" id="member" name="memberLead" placeholder="Member Name")
-       
+          div(class = "col-md-9")
+           input(class = "form-control" type="text" id="memberName1" name="memberName1" placeholder="Member #1 Name")
+          div(class = "col-md-1")
+    a(id = "slideMembers" class = "btn btn-raised btn-primary" style = "float:right;" ) Submit
+   div( id = "createURL" style = "padding: 10px;" class = "collapse")
+    div(class = "well bs-component")
+     fieldset
+      legend Here's your meeting!
+      a(id = "uniqURL")
   script(src='/javascripts/panelSlide.js')
   script(src='/javascripts/create.js')                
   script(src='/javascripts/createValidate.js') 

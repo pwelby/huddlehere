@@ -1,4 +1,4 @@
-input.error
+.error
 {
- outline: #FF0000 groove thin
+ color: red;
 }

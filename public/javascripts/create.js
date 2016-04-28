@@ -17,21 +17,35 @@ $( "#createURL" ).last().addClass( "collapse" );
 
 //Handle member text fields add/remove
 $(function() {
-        var memberDiv = $('#memberText');
-        var i = $('#memberText p').size() + 1;
-        
-        $('#addMemberBtn').on('click', function() {
-                $('<p><input type="text" id="memberName' + i + '"size="20" name="memberName' + i +'" value="" placeholder="Member Name" /></label> <input type="button" id="rmvMemberBtn" value="Remove"></input></p>').appendTo(memberDiv);
-                i++;      
-                return false;
-        });
+    memberHash = new Array(200);
+    memberHash[1] = true;
+    var counter;
+    console.log("<input class = 'form-control' type = 'text' id= 'memberName" + counter + "' name = 'memberName" + counter + "' placeholder = 'Member #" + counter + " Name></input>");
+    $('#addMemberBtn').on('click', function() {
+        for(var i = 1; i <= memberHash.length; i++){
+            if(memberHash[i] === undefined){
+                counter = i;
+                console.log(i);
+                break;
+            }
+        }
+        var field = $(this).parent().parent().parent();
+        $(field).append("<div class = 'form-group'>\n\
+ <label for = 'memberName" + counter + "'class = 'col-md-2 control-label'>Member #" + counter + "</label>\n\
+  <div class = 'col-md-10'> <div class = 'col-md-9'> <input class = 'form-control' type = 'text' id= 'memberName" + counter + "' name = 'memberName" + counter + "' placeholder = 'Member #" + counter + " Name'></input></div><div class = 'col-md-1'> <a id = 'rmvMemberBtn' class='btn btn-raised btn-xs'> <i class='material-icons'>clear</i><div class = 'ripple-container'></div></div></div>");
+        memberHash[counter] = true;
+        console.log("member hit");
+    });
         
         $('body').on('click', '#rmvMemberBtn', function() { 
-                if( i > 2 ) {
-                        $(this).parents('p').remove();
-                        i--;
-                }
-                return false;
+                parent = $(this).parent().parent().parent();
+                parent.remove();
+                num = $(this).parent().prev().find("input").attr("id")
+                console.log($(this).parent().attr("class"));
+                console.log($(this).parent().prev().attr("class"));
+                console.log($(this).parent().prev().find("input").attr("class"));
+                memberHash[num[10]] = undefined;
+                console.log(counter);
         });
 });
 
@@ -138,8 +152,7 @@ $(document).ready(function() {
   });
 
   $(function() {
-      console.log("hit")
-    $('#datepicker').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY', time: false, minDate : new Date() });
+    $('#datepicker').bootstrapMaterialDatePicker({ format : 'MM/DD/YYYY', time: false, minDate : new Date() });
 
   });
   $(function() {
@@ -150,9 +163,10 @@ $(document).ready(function() {
     {
       var allMembers = ""; 
       //get all members
-      $("#memberText").children().each(function(i, obj){
+      $("#memberWrapper").children().each(function(i, obj){
         member = $(this).find("[id^=memberName]").val();
-        if(member == "")
+        console.log(member);
+        if(member === "" || member === undefined)
         {
           console.log("do nothing");
           //do nothing
@@ -164,13 +178,18 @@ $(document).ready(function() {
       });     
       
       allMembers = allMembers.substring(0, allMembers.length - 1 );
-      
     var startDate = new Date($("#datepicker").val());
     var endDate = new Date(startDate);
     var startHours = parseInt($("#timeStartHours").val());
     var startMinutes = parseInt($("#timeStartMinutes").val());
     var endHours = parseInt($("#timeEndHours").val());
     var endMinutes = parseInt($("#timeEndMinutes").val());
+     console.log(startDate);
+     console.log(endDate);
+     console.log(startHours);
+     console.log(startMinutes);
+     console.log(endHours);
+     
 
    if (startHours < 12) {
       if ($("#StartPM").is(":checked")) {
@@ -209,8 +228,9 @@ $(document).ready(function() {
         format: "Default",
         location: locCoords,
         leader: meetLeader,
-        members: allMembers,
+        members: allMembers
     };
+    console.log(createMeeting);
     $.post(window.location.protocol + "//" + window.location.host + "/api/meetings", createMeeting, function(data, textStatus, jqXHR) {
       var pagePath = "/m/" + data._id + "/l";
       //window.prompt("Here is your UNIQUE meeting page URL (CTRL+C, ENTER to copy):", window.location.protocol + "//" + window.location.host + pagePath);

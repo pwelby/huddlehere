@@ -3,40 +3,55 @@ extends layout
 block content
   script(type='text/javascript').
     var objMeeting = !{JSON.stringify(meeting)}
-  .row.page-header: .col-lg-12
-    h1 HuddleHere
-     br
-     small Make Group Projects Easy!    
+  #banner.page-header
+    .row
+      .col-lg-6
+        h1 HuddleHere
+          br
+          small Make Group Projects Easy!
+  hr(style="background-color: #BDBDBD;")    
   .row
     .col-xs-12.col-sm-6
       .panel.panel-primary
         .panel-heading
           h2.panel-title Time and Availability
         .panel-body
-          form(name='memberForm', id='memberForm', action="")
-            h4 I am:
-            .dropdown
-              select(name='memberPicker', id='memberPicker')
-                option(value='defaultOp' selected) Choose...
+          form( name='memberForm', id='memberForm', action="")
+           fieldset
+            div(class = "form-group")
+             label(for = "memberPicker" class = "col-md-2 control-label") Name
+             div(class = "col-md-10")
+              select(class = "form-control" name='memberPicker', id='memberPicker')
+                option(value='defaultOp' selected) Choose your name
                 each member in meeting.members
                   option(value="#{member.split(';')[0]}")= member.split(';')[0]
-              | &nbsp;
-              label(for='memberPicker', class='error')
-            h4 Start Time
-            p
-              span#meetingStart
-            h4 End Time
-            p
-              span#meetingEnd
+              span(class="help-block") 
             br
-            h4 Availability
-            input(type="radio" name="myStatus" class="statusRadio" value="Available" id="statAvailable" checked)
-            | Available
             br
-            input(type="radio" name="myStatus" class="statusRadio" value="Unavailable")
-            | Unavailable
+            div(class = "form-group")
+             div(class = "col-md-3")
+              h5 Start Time:
+             div(class = "col-md-9")
+              h5(id = "meetingStart")
             br
-            button(type="submit", id="submitForm", value="Submit") Submit
+            div(class = "form-group")
+             div(class = "col-md-3")
+              h5 End Time:
+             div(class = "col-md-9")
+              h5(id = "meetingEnd")
+            br
+            div(class = "form-group")
+             label( class = "col-md-2 control-label") Availability
+             div(class = "col-md-10")
+              div(class = "radio radio-primary")
+               label
+                input(type="radio" name="myStatus" class="statusRadio" value="Available" id="statAvailable" checked)
+                | Available
+              div(class = "radio radio-primary")
+               label
+                input(type="radio" name="myStatus" class="statusRadio" value="Unavailable")
+                | Unavailable
+            a(id = "submitForm" class = "btn btn-raised btn-primary" style = "float:right;" ) Submit  
     .col-xs-12.col-sm-4
       .panel.panel-primary
         .panel-heading
@@ -51,19 +66,43 @@ block content
     .col-xs-12
       .panel.panel-primary.agenda-panel
         .panel-heading
-          a.btn.btn-default.pull-right Suggest an item
           h2.panel-title Meeting Agenda
-        .panel-body.agenda-container
-          .col-xs-12.list-group-item  
+        .panel-body.agenda-container  
             each item in meeting.agenda
               .panel.panel-default
                 .panel-heading
                   h2.panel-title= item.title
-                .panel-body
+                .panel-body(id = "panel_body" + item._id)
                   em= item.description
-                a.btn.btn-default Add Comment
+               div(class = "form-group")
+                label(for = "commentNamePicker" class = "col-md-1 control-label") Name
+                div(class = "col-md-11")
+                 div(class = "col-md-5")
+                  select(class = "form-control" name='commentNamePicker', id='commentName' + item._id)
+                   option(value='defaultOp' selected) Choose your name
+                   each member in meeting.members
+                     option(value="#{member.split(';')[0]}")= member.split(';')[0]
+                  span(class="help-block")
+                 div(class = "col-md-6")
+               div(class = "form-group")
+                label(for = "commentText" + item._id class = "col-md-1 control-label") Comment
+                div(class = "col-md-11")
+                 div(class = "col-md-5")
+                  textarea(class="form-control" rows="3" id= "commentText" + item._id placeholder = "Enter your comment here")
+                  span(class="help-block")
+                 div(class = "col-md-6")
+               div(class = "col-md-12")
+                div(class = "col-md-1")
+                div(class = "col-md-11")
+                 div(class = "col-md-5")
+                  a(id=item._id class = "btn btn-raised btn-primary" style = "float:right;" onclick="submitComment(this.id);") Comment
+                
+                  
+                
+               
   //- script(src='/public/javascripts/memberPost.js')
   script(src='/javascripts/geo.js')
   script(src='/javascripts/coachTimes.js')
   script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC-vUxYe3poWbJS5fqIDwRf2c0CNk4kXwo&callback=geoInitialize')
   script(src='/javascripts/memberPost.js')
+  script(src='/javascripts/memberComment.js')

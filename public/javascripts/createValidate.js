@@ -32,7 +32,6 @@ $(document).ready(function() {
         }
     },
     errorPlacement: function(error, element) {
-            console.log("hit");
             helpObj = $(element).next();
             $(helpObj).html(error.text());
             parentObj = $(element).parent().parent();
@@ -126,8 +125,19 @@ $(document).ready(function() {
             "required" : "The leader field is required!"
         }
     },
-    errorElement: "div",
-    errorLabelContainer: "#memErrBox"
+    errorPlacement: function(error, element) {
+            console.log("hit");
+            helpObj = $(element).next();
+            $(helpObj).html(error.text());
+            parentObj = $(element).parent().parent();
+            $(parentObj).addClass("has-error");
+    },
+    success: function(label,element) {
+        helpObj = $(element).next();
+        $(helpObj).html("");
+        parentObj = $(element).parent().parent();
+            $(parentObj).removeClass("has-error");
+    }
   });
       
   $('body').on('click', '#slideLocation', function() {
