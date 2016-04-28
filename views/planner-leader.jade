@@ -3,11 +3,9 @@ extends layout
 block content
   script(type='text/javascript').
     var objMeeting = !{JSON.stringify(meeting)}
-  .row
-    .col-lg-6
-      h1 HuddleHere
-      small &nbsp;Make Group Projects Easy!
-  hr
+  .row.page-header
+    .col-lg-12
+      h1 Meeting Planner (Leader View)
   .row
     .col-xs-12.col-sm-4
       .panel.panel-primary
