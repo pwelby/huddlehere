@@ -5,10 +5,14 @@ block content
     var objMeeting = !{JSON.stringify(meeting)}
   #banner.page-header
     .row
-      .col-lg-6
-        h1 HuddleHere
+      .col-lg-8
+       .col-lg-2
+        <i id="icon" class="fa fa-group" style="text-shadow: rgb(0, 105, 95) 0px 0px 0px, rgb(0, 111, 101) 1px 1px 0px, rgb(0, 118, 107) 2px 2px 0px, rgb(0, 124, 113) 3px 3px 0px, rgb(0, 131, 119) 4px 4px 0px, rgb(0, 137, 124) 5px 5px 0px, rgb(0, 144, 130) 6px 6px 0px; font-size: 80px; color: rgb(255, 255, 255); height: 115px; width: 115px; line-height: 115px; border-radius:50% ; text-align: center; background-color: rgb(0, 150, 136);"></i> 
+       .col-md-5
+        div(class = "headWrapper" style = "margin-top: 25px; margin-left: 5px;")
+         h1(style = "color: #009688;") HuddleHere
           br
-          small Make Group Projects Easy!
+         small Make Group Projects Easy!
   hr(style="background-color: #BDBDBD;")    
   .row
     .col-xs-12.col-sm-6
@@ -74,32 +78,29 @@ block content
                   h2.panel-title= item.title
                 .panel-body(id = "panel_body" + item._id)
                   em= item.description
-               div(class = "form-group")
-                label(for = "commentNamePicker" class = "col-md-1 control-label") Name
-                div(class = "col-md-11")
-                 div(class = "col-md-5")
-                  select(class = "form-control" name='commentNamePicker', id='commentName' + item._id)
-                   option(value='defaultOp' selected) Choose your name
-                   each member in meeting.members
-                     option(value="#{member.split(';')[0]}")= member.split(';')[0]
-                  span(class="help-block")
-                 div(class = "col-md-6")
-               div(class = "form-group")
-                label(for = "commentText" + item._id class = "col-md-1 control-label") Comment
-                div(class = "col-md-11")
-                 div(class = "col-md-5")
-                  textarea(class="form-control" rows="3" id= "commentText" + item._id placeholder = "Enter your comment here")
-                  span(class="help-block")
-                 div(class = "col-md-6")
-               div(class = "col-md-12")
-                div(class = "col-md-1")
-                div(class = "col-md-11")
-                 div(class = "col-md-5")
-                  a(id=item._id class = "btn btn-raised btn-primary" style = "float:right;" onclick="submitComment(this.id);") Comment
-                
-                  
-                
-               
+               form(class = "form-horizontal" id = "commentForm")
+                div(class = "form-group")
+                 label(for = "commentNamePicker" class = "col-md-1 control-label") Name
+                 div(class = "col-md-11")
+                  div(class = "col-md-5")
+                   select(class = "form-control" name='commentNamePicker', id='commentName' + item._id)
+                    option(value='defaultOp' selected) Choose your name
+                    each member in meeting.members
+                      option(value="#{member.split(';')[0]}")= member.split(';')[0]
+                   span(class="help-block")
+                  div(class = "col-md-6") 
+                div(class = "form-group")
+                 label(for = "commentText" + item._id class = "col-md-1 control-label") Comment
+                 div(class = "col-md-11")
+                  div(class = "col-md-5")
+                   textarea(class="form-control" rows="4" id= "commentText" + item._id placeholder = "Enter your comment here")
+                   span(class="help-block")
+                  div(class = "col-md-6")
+                div(class = "col-md-12")
+                 div(class = "col-md-1")
+                 div(class = "col-md-11")
+                  div(class = "col-md-5")
+                   a(id=item._id class = "btn btn-raised btn-primary" style = "float:right;" onclick="submitComment(this.id);") Comment
   //- script(src='/public/javascripts/memberPost.js')
   script(src='/javascripts/geo.js')
   script(src='/javascripts/coachTimes.js')

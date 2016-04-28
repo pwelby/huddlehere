@@ -3,11 +3,17 @@ extends layout
 block content
   script(type='text/javascript').
     var objMeeting = !{JSON.stringify(meeting)}
-  .row
-    .col-lg-6
-      h1 HuddleHere
-      small &nbsp;Make Group Projects Easy!
-  hr
+  #banner.page-header  
+    .row
+      .col-lg-8
+       .col-lg-2
+        <i id="icon" class="fa fa-group" style="text-shadow: rgb(0, 105, 95) 0px 0px 0px, rgb(0, 111, 101) 1px 1px 0px, rgb(0, 118, 107) 2px 2px 0px, rgb(0, 124, 113) 3px 3px 0px, rgb(0, 131, 119) 4px 4px 0px, rgb(0, 137, 124) 5px 5px 0px, rgb(0, 144, 130) 6px 6px 0px; font-size: 80px; color: rgb(255, 255, 255); height: 115px; width: 115px; line-height: 115px; border-radius:50% ; text-align: center; background-color: rgb(0, 150, 136);"></i> 
+       .col-md-5
+        div(class = "headWrapper" style = "margin-top: 25px; margin-left: 5px;")
+         h1(style = "color: #009688;") HuddleHere
+          br
+         small Make Group Projects Easy!
+  hr(style="background-color: #BDBDBD;")  
   .row
     .col-xs-12.col-sm-4
       .panel.panel-primary

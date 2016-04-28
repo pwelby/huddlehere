@@ -20,6 +20,19 @@ $(document).ready(function() {
   $("#memberForm").validate({
     rules: {
       memberPicker: { notChosen: true }
+    },
+    errorPlacement: function(error, element) {
+            console.log("hit");
+            helpObj = $(element).next();
+            $(helpObj).html(error.text());
+            parentObj = $(element).parent().parent();
+            $(parentObj).addClass("has-error");
+    },
+    success: function(label,element) {
+        helpObj = $(element).next();
+        $(helpObj).html("");
+        parentObj = $(element).parent().parent();
+            $(parentObj).removeClass("has-error");
     }
   });
   
@@ -27,6 +40,33 @@ $(document).ready(function() {
   $("#memberForm").submit(function() {
     return false;
   });
+  
+  $("#commentForm").validate({
+    rules: {
+      memberLead: {
+        "required" : true
+      }
+    },
+    messages: {
+        memberLead: {
+            "required" : "The leader field is required!"
+        }
+    },
+    errorPlacement: function(error, element) {
+            console.log("hit");
+            helpObj = $(element).next();
+            $(helpObj).html(error.text());
+            parentObj = $(element).parent().parent();
+            $(parentObj).addClass("has-error");
+    },
+    success: function(label,element) {
+        helpObj = $(element).next();
+        $(helpObj).html("");
+        parentObj = $(element).parent().parent();
+            $(parentObj).removeClass("has-error");
+    }
+  });
+  
 });
 
 
