@@ -137,10 +137,10 @@ $(document).ready(function() {
     }
   });
 
-  $('.dropdown-toggle').dropdown();
-
   $(function() {
-    $("#datepicker").datepicker({onClose: function() { this.focus(); }});
+      console.log("hit")
+    $('#datepicker').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+
   });
   $(function() {
   
@@ -200,15 +200,14 @@ $(document).ready(function() {
     
     
     var meetLeader = $('#memberLead').val();
-    var meetForm = $('#meetingType').val();
     
     //meeting object
     var locCoords = parseFloat(createCurrentLocCoords[0]) + "," + parseFloat(createCurrentLocCoords[1]);
     var createMeeting = {
         meetingDate: startDate,
         endTime: endDate,
+        format: "Default",
         location: locCoords,
-        format: meetForm,
         leader: meetLeader,
         members: allMembers,
     };

@@ -1,3 +1,4 @@
+
 /**
  * File: /public/javascripts/panelSlide.js
  * Author: Patrick Quaratiello
@@ -36,4 +37,3 @@ doSlide = function(currentPanel, nextPanel, selectedLocation) {
         initNearbyMap();
     }
   }
-  
