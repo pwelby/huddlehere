@@ -192,11 +192,11 @@ $(document).ready(function() {
      
 
    if (startHours < 12) {
-      if ($("#StartPM").is(":checked")) {
+      if ($("#Startam").val() === "PM") {
         // we want hours 1-11 PM, so add 12
         startHours = startHours + 12;
       }
-    } else if ($("#StartAM").is(":checked")) {
+    } else if ($("#Startam").val() === "AM") {
       // we want 12am, which is 0 hours
       startHours = 0;
     }
@@ -205,11 +205,11 @@ $(document).ready(function() {
     startDate.setMinutes(startMinutes);
 
     if (endHours < 12) {
-      if ($("#EndPM").is(":checked")) {
+      if ($("#Endam").val() === "PM") {
         // we want hours 1-11 PM, so add 12
         endHours = endHours + 12;
       }
-    } else if ($("#EndAM").is(":checked")) {
+    } else if ($("#Endam").val() === "AM") {
       // we want 12am, which is 0 hours
       endHours = 0;
     }
