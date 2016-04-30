@@ -14,7 +14,9 @@ $( "#createMembers" ).last().addClass( "collapse" );
 $( "#createDetails" ).last().addClass( "collapse" );
 $( "#createURL" ).last().addClass( "collapse" );
 
-
+var getUrl = function(){
+    console.log(window.location.protocol + "//" + window.location.host + "/create");
+}
 //Handle member text fields add/remove
 $(function() {
     memberHash = new Array(200);
